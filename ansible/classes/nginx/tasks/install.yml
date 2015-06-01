@@ -1,7 +1,7 @@
 ---
 
 - name: install nginx.repo
-  file: src=nginx.conf dest=/etc/yum.repos.d/nginx.repo
+  file: src=nginx.repo dest=/etc/yum.repos.d/nginx.repo
 
 - name: install nginx
   yum: name=nginx state=latest
