@@ -1,0 +1,31 @@
+---
+
+- name: install carbon
+  pip: 
+    name=carbon
+    state=present
+
+- name: install whisper
+  pip: 
+    name=whisper
+    state=present
+  
+- name: install graphite-web
+  pip: 
+    name=graphite-web
+    state=present
+
+- name: configure carbon.conf
+  template: 
+    src=carbon.conf.j2
+    dest=/opt/graphite/conf/carbon.conf
+
+- name: configure carbon storage-schemas
+  template: 
+    src=storage-schemas.conf.j2
+    dest=/opt/graphite/conf/storage-schemas.conf
+
+- name: configure graphite local_settings.py
+  template:
+    src=local_settings.py.j2
+    dest=/opt/graphite/webapp/graphite/local_settings.py
