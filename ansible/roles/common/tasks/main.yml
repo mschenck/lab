@@ -4,7 +4,7 @@
   yum: name=python-setuptools.noarch state=latest
 
 - name: install pip
-  easy_install: name=pip state=latest
+  easy_install: name=pip state=present
 
 - name: install python-devel
   yum: name=python-devel state=latest
