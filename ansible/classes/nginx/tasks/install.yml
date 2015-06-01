@@ -10,3 +10,6 @@
   file:
     dest=/etc/nginx/conf.d
     state=directory
+
+- name: nginx init script
+  copy: src=nginx.init dest=/etc/init.d/nginx mode=0755
