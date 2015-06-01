@@ -1,0 +1,12 @@
+server {
+  listen 80;
+
+  location /static/ {
+    alias /opt/graphite/static/;
+  }
+
+  location / {
+    include uwsgi_params;
+    uwsgi_pass localhost:{{ uwsgi_port }};
+  }
+}

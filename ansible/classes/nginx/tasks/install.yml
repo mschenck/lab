@@ -5,3 +5,8 @@
 
 - name: install nginx
   yum: name=nginx state=latest
+
+- name: make conf.d
+  file:
+    dest=/etc/nginx/conf.d
+    state=directory

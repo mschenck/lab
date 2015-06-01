@@ -1,3 +1,8 @@
 ---
 
 - include: install.yml
+
+- name: "{{ name }}" conf.d
+  template:
+    src="{{ name }}".conf.j2
+    dest="/etc/nginx/conf.d/{{ name }}.conf"

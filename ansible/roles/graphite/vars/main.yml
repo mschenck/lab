@@ -1,2 +1,3 @@
 graphite:
   timezone: "America/New_York"
+  uwsgi_port: 8080
