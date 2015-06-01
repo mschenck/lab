@@ -1,0 +1,7 @@
+---
+
+# Graphite node
+
+- hosts: all
+  roles:
+    - graphite
