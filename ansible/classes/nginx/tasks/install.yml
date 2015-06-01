@@ -13,3 +13,6 @@
 
 - name: nginx init script
   copy: src=nginx.init dest=/etc/init.d/nginx mode=0755
+
+- name: enable and start nginx
+  service: name=nginx enabled=yes state=started
