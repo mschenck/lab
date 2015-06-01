@@ -14,5 +14,10 @@
 - name: nginx init script
   copy: src=nginx.init dest=/etc/init.d/nginx mode=0755
 
+- name: nginx.conf
+  template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf
+  notify:
+    - restart 
+
 - name: enable and start nginx
   service: name=nginx enabled=yes state=started
