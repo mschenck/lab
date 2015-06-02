@@ -8,7 +8,7 @@ RUN yum install -y git
 
 # Clone lab repo and run graphite playbook
 RUN cd /opt ; git clone https://github.com/mschenck/lab.git
-RUN cd /opt/ansible ; ansible-playbook -i "localhost," -c local graphite.yml
+RUN cd /opt/lab/ansible ; ansible-playbook -i "localhost," -c local graphite.yml
 
 # export http
 EXPORT 80
