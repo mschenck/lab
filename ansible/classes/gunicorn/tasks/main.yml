@@ -9,7 +9,7 @@
 
 - name: install "{{ name }}" init
   template:
-    src: "{{ name }}.init.j2"
+    src: "gunicorn.init.j2"
     dest: "/etc/init.d/{{ name }}"
     mode: 0755
 
