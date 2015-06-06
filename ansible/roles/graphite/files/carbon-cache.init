@@ -21,7 +21,7 @@ exec="/opt/graphite/bin/carbon-cache.py"
 prog=$(basename "$exec")
 CARBON_CONFIG_PATH="/opt/graphite/conf/carbon.conf"
 CARBON_CACHE_ARGS=""
-CARBON_CACHE_PIDFILE="/var/run/carbon/carbon-cache.pid"
+CARBON_CACHE_PIDFILE="/var/run/carbon-cache.pid"
 GRAPHITE_STORAGE_DIR="/var/lib/carbon"
 
 if [ -f /etc/sysconfig/carbon-cache ]; then

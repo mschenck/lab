@@ -21,6 +21,11 @@
     dest=/etc/init.d/carbon-cache
     mode=0755
 
+- name: graphite storage dir
+  file:
+    dest=/var/lib/carbon
+    state=directory
+
 - name: configure carbon.conf
   template: 
     src=carbon.conf.j2
