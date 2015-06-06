@@ -1,0 +1,12 @@
+---
+
+nginx:
+  default_type: "application/octet-stream"
+  keepalive_timeout: 65
+  gzip: "off"
+  core:
+    sendfile: "on"
+    tcp_nodelay: "on"
+   
+repo:
+  old: false 
