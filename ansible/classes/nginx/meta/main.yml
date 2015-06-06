@@ -1,0 +1,5 @@
+---
+dependencies:
+  - { role: monit,
+      name: nginx,
+      pidfile: '/var/run/nginx.pid' }

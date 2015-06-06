@@ -1,0 +1,6 @@
+---
+
+- name: monit "{{ name }}" monit.d
+  template:
+    src: monit.d.j2
+    dest: "/etc/monit.d/{{ name }}"

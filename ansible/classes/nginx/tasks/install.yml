@@ -16,11 +16,11 @@
     dest: /etc/init.d/nginx
     mode: 0755
 
-- name: enable and start nginx
-  service:
-    name: nginx
-    enabled: yes
-    state: started
+#- name: enable and start nginx
+#  service:
+#    name: nginx
+#    enabled: yes
+#    state: started
 
 - name: make conf.d
   file:

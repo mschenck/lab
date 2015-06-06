@@ -2,3 +2,7 @@
 dependencies:
   - { role: nginx,
       name: graphite }
+  - { role: monit,
+      name: graphite }
+  - { role: monit,
+      name: carbon-cache }

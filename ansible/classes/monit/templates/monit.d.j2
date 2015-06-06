@@ -1,0 +1,3 @@
+check {{ check_type | default("process") }} {{ name }} with pidfile {{ pidfile }}
+  start program = "/etc/init.d/{{ name }} start"
+  stop program  = "/etc/init.d/{{ name }} stop"
