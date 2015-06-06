@@ -1,5 +1,5 @@
 ---
-dependencies:
-  - { role: monit,
-      name: "{{ name }}",
-      pidfile: '/var/run/{{ name }}.pid' }
+#dependencies:
+#  - { role: monit,
+#      name: "{{ name }}",
+#      pidfile: '/var/run/{{ name }}.pid' }

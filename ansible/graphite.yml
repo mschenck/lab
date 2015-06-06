@@ -9,3 +9,6 @@
     - { role: gunicorn,
         name: graphite,
         app_root: "/opt/graphite/webapp" }
+    - { role: monit,
+        name: "{{ name }}",
+        pidfile: '/var/run/{{ name }}.pid' }
