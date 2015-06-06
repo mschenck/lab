@@ -21,5 +21,5 @@
 
 - name: install epel
   yum:
-    name: "http://download.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_ }}.noarch.rpm"
+    name: "http://download.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"
     state: latest
