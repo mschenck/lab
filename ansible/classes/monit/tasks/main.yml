@@ -6,3 +6,4 @@
   template:
     src: monit.d.j2
     dest: "/etc/monit.d/{{ name }}"
+  notify: reload monit
