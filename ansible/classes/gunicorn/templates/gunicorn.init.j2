@@ -27,10 +27,11 @@ PIDFILE=/var/run/{{ name }}.pid
 lockfile=/var/lock/subsys/{{ name }}
 
 start() {
-  [ -x $GUNICORN ] || exit 5
-  cd "{{ app_root }}/{{ name }}"
-  daemon $GUNICORN $APP_MODULE --bind $BIND_ADDR:$BIND_PORT --pid $PIDFILE
-  retval=$?
+    [ -x $GUNICORN ] || exit 5
+    echo -n $"Starting {{ name }}: "
+    cd "{{ app_root }}/{{ name }}"
+    daemon $GUNICORN $APP_MODULE --bind $BIND_ADDR:$BIND_PORT --pid $PIDFILE
+    retval=$?
     [ $retval -eq 0 ] && touch $lockfile
     return $retval
 }
