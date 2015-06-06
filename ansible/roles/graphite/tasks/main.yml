@@ -20,7 +20,6 @@
     name={{ item }}
     state=present
   with_items:
-    - gunicorn
     - django
     - django-tagging
 
@@ -47,11 +46,6 @@
   template: 
     src=storage-schemas.conf.j2
     dest=/opt/graphite/conf/storage-schemas.conf
-
-- name: configure graphite-web wsgi
-  copy:
-    src=graphite.wsgi
-    dest=/opt/graphite/conf/graphite.wsgi
 
 - name: configure graphite local_settings.py
   template:

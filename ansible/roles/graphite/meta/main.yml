@@ -1,3 +1,5 @@
 ---
 dependencies:
-  - { role: nginx, name: graphite, uwsgi_port: "{{ graphite.uwsgi_port }}" }
+  - { role: nginx,
+      name: graphite,
+      uwsgi_port: "{{ graphite.uwsgi_port }}" }
