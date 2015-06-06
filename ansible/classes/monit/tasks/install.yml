@@ -5,6 +5,12 @@
     name: monit
     state: latest
 
+- name: install monit init
+  copy:
+    src: monit.init
+    dest: /etc/init.d/monit
+    mode: 0755
+
 - name: start and enable monit service
   service:
     name: monit
