@@ -4,27 +4,27 @@
 
 - name: carbon-cache init script
   copy:
-    src=carbon-cache.init
-    dest=/etc/init.d/carbon-cache
-    mode=0755
+    src: carbon-cache.init
+    dest: /etc/init.d/carbon-cache
+    mode: 0755
 
 - name: configure carbon.conf
   template: 
-    src=carbon.conf.j2
-    dest=/opt/graphite/conf/carbon.conf
+    src: carbon.conf.j2
+    dest: /opt/graphite/conf/carbon.conf
 
 - name: configure carbon storage-schemas
   template: 
-    src=storage-schemas.conf.j2
-    dest=/opt/graphite/conf/storage-schemas.conf
+    src: storage-schemas.conf.j2
+    dest: /opt/graphite/conf/storage-schemas.conf
 
 - name: configure graphite local_settings.py
   template:
-    src=local_settings.py.j2
-    dest=/opt/graphite/webapp/graphite/local_settings.py
+    src: local_settings.py.j2
+    dest: /opt/graphite/webapp/graphite/local_settings.py
 
 - name: enable and start carbon-cache
   service:
-    name=carbon-cache
-    enabled=yes
-    state=started
+    name: carbon-cache
+    enabled: yes
+    state: started

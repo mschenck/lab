@@ -2,4 +2,4 @@
 
 - name: install gunicorn
   pip:
-    name=gunicorn
+    name: gunicorn

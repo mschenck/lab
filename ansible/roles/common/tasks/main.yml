@@ -1,13 +1,18 @@
 ---
 
 - name: install easy_install
-  yum: name=python-setuptools state=present
+  yum:
+    name: python-setuptools
+    state: present
 
 - name: install pip
-  easy_install: name=pip
+  easy_install:
+    name: pip
 
 - name: install python-devel
-  yum: name=python-devel state=latest
+  yum:
+    name: python-devel state=latest
 
 - name: install initscripts
-  yum: name=initscripts state=latest
+  yum:
+    name: initscripts state=latest

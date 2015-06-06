@@ -2,34 +2,34 @@
 
 - name: install nginx.repo
   template:
-    src=nginx.repo.j2
-    dest=/etc/yum.repos.d/nginx.repo
+    src: nginx.repo.j2
+    dest: /etc/yum.repos.d/nginx.repo
 
 - name: install nginx
   yum:
-    name=nginx
-    state=latest
+    name: nginx
+    state: latest
 
 - name: nginx init script
   copy:
-    src=nginx.init
-    dest=/etc/init.d/nginx
-    mode=0755
+    src: nginx.init
+    dest: /etc/init.d/nginx
+    mode: 0755
 
 - name: enable and start nginx
   service:
-    name=nginx
-    enabled=yes
-    state=started
+    name: nginx
+    enabled: yes
+    state: started
 
 - name: make conf.d
   file:
-    dest=/etc/nginx/conf.d
-    state=directory
+    dest: /etc/nginx/conf.d
+    state: directory
 
 - name: nginx.conf
   template:
-    src=nginx.conf.j2
-    dest=/etc/nginx/nginx.conf
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
   notify:
     - restart nginx
