@@ -22,9 +22,3 @@
   template:
     src: local_settings.py.j2
     dest: /opt/graphite/webapp/graphite/local_settings.py
-
-#- name: enable and start carbon-cache
-#  service:
-#    name: carbon-cache
-#    enabled: yes
-#    state: started

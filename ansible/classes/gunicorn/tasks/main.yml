@@ -13,9 +13,3 @@
     dest: "/etc/init.d/{{ name }}"
     mode: 0755
   notify: reload monit
-
-#- name: enable and start "{{ name }}"
-#  service:
-#    name: "{{ name }}"
-#    enabled: yes
-#    state: started
