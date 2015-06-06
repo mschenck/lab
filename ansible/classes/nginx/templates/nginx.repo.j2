@@ -6,6 +6,6 @@ name=nginx repo
 baseurl=http://nginx.org/packages/old/centos/$releasever/$basearch/
 {% else -%}
 baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
-{% end -%}
+{% endif -%}
 gpgcheck=0
 enabled=1
