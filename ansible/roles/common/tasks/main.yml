@@ -9,10 +9,6 @@
   easy_install:
     name: pip
 
-- name: install python-devel
-  yum:
-    name: python-devel state=latest
-
 - name: install initscripts
   yum:
     name: initscripts state=latest
