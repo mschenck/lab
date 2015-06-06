@@ -49,7 +49,7 @@
     dest=/opt/graphite/conf/storage-schemas.conf
 
 - name: configure graphite-web wsgi
-  file: 
+  copy:
     src=graphite.wsgi
     dest=/opt/graphite/conf/graphite.wsgi
 
