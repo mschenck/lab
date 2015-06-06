@@ -3,6 +3,5 @@ dependencies:
   - { role: nginx,
       name: graphite }
   - { role: monit,
-      name: graphite }
-  - { role: monit,
-      name: carbon-cache }
+      name: carbon-cache,
+      pidfile: '/var/run/carbon-cache.pid' }
