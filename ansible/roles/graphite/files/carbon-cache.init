@@ -19,7 +19,7 @@
 
 exec="/usr/bin/carbon-cache.py"
 prog=$(basename "$exec")
-CARBON_CONFIG_PATH="/etc/carbon/carbon.conf"
+CARBON_CONFIG_PATH="/opt/graphite/conf/carbon.conf"
 CARBON_CACHE_ARGS=""
 CARBON_CACHE_PIDFILE="/var/run/carbon/carbon-cache.pid"
 GRAPHITE_STORAGE_DIR="/var/lib/carbon"
