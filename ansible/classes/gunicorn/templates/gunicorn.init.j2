@@ -28,6 +28,7 @@ lockfile=/var/lock/subsys/{{ name }}
 
 start() {
   [ -x $GUNICORN ] || exit 5
+  cd "{{ app_root }}/{{ name }}"
   daemon $GUNICORN $APP_MODULE --bind $BIND_ADDR:$BIND_PORT --pid $PIDFILE
   retval=$?
     [ $retval -eq 0 ] && touch $lockfile
