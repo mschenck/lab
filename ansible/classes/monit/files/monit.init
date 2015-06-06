@@ -79,7 +79,7 @@ case "$1" in
         rh_status_q && exit 7
         $1
         ;;
-    restart:configtest)
+    restart|configtest)
         $1
         ;;
     status)
