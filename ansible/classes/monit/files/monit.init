@@ -50,6 +50,7 @@ configtest() {
 reload() {
     configtest || return $?
     $MONIT reload
+    sleep 5
 }
 
 restart() {
