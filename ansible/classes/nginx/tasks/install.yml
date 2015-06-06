@@ -10,6 +10,12 @@
     name=nginx
     state=latest
 
+- name: nginx init script
+  copy:
+    src=nginx.init
+    dest=/etc/init.d/nginx
+    mode=0755
+
 - name: enable and start nginx
   service:
     name=nginx
@@ -20,12 +26,6 @@
   file:
     dest=/etc/nginx/conf.d
     state=directory
-
-- name: nginx init script
-  copy:
-    src=nginx.init
-    dest=/etc/init.d/nginx
-    mode=0755
 
 - name: nginx.conf
   template:
