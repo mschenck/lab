@@ -8,5 +8,4 @@
     - graphite
     - { role: gunicorn,
         name: graphite,
-        dest: "/opt/graphite/conf",
-        app_root: "/opt/graphite/webapp" }
+        app_root: "/opt/graphite/webapp/graphite" }
