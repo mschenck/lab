@@ -8,4 +8,4 @@
     - graphite
     - { role: gunicorn,
         name: graphite,
-        app_root: "/opt/graphite/webapp/graphite" }
+        app_root: "/opt/graphite/webapp" }

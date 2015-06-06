@@ -1,3 +1,5 @@
+# {{ ansible_managed }}
+
 server {
   listen 80;
 
@@ -8,6 +10,6 @@ server {
   location / {
     proxy_set_header X-Forwarded-Host  $server_name;
     proxy_set_header X-Real-IP         $remote_addr;
-    proxy_pass                         http://localhost:{{ uwsgi_port }};
+    proxy_pass                         http://localhost:{{ uwsgi_port | default(8000) }};
   }
 }
