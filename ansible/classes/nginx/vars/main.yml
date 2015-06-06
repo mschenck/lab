@@ -1,12 +1,14 @@
 ---
 
 nginx:
-  default_type: "application/octet-stream"
   keepalive_timeout: 65
-  gzip: "off"
   core:
+    default_type: "application/octet-stream"
     sendfile: "on"
     tcp_nodelay: "on"
+    worker_processes: 1
+    worker_connections: 1024
+  gzip: "off"
    
 repo:
   old: false 

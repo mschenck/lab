@@ -6,7 +6,7 @@ pid                     /var/run/nginx.pid;
 
 
 events {
-    worker_connections  {{ nginx.events.worker_connections }};
+    worker_connections  {{ nginx.core.worker_connections }};
 }
 
 
