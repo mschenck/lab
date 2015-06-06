@@ -1,8 +1,8 @@
 server {
   listen 80;
 
-  location /static/ {
-    alias /opt/graphite/static/;
+  location /content/ {
+    alias /opt/graphite/webapp/content/;
   }
 
   location / {

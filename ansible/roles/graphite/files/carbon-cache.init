@@ -22,7 +22,7 @@ prog=$(basename "$exec")
 CARBON_CONFIG_PATH="/opt/graphite/conf/carbon.conf"
 CARBON_CACHE_ARGS=""
 CARBON_CACHE_PIDFILE="/var/run/carbon-cache.pid"
-GRAPHITE_STORAGE_DIR="/var/lib/carbon"
+GRAPHITE_STORAGE_DIR="/opt/graphite/storage"
 
 if [ -f /etc/sysconfig/carbon-cache ]; then
     . /etc/sysconfig/carbon-cache

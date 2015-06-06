@@ -15,16 +15,16 @@
     name=graphite-web
     state=present
 
+- name: install gunicorn
+  pip:
+    name=gunicorn
+    state=present
+
 - name: carbon-cache init script
   copy:
     src=carbon-cache.init
     dest=/etc/init.d/carbon-cache
     mode=0755
-
-- name: graphite storage dir
-  file:
-    dest=/var/lib/carbon
-    state=directory
 
 - name: configure carbon.conf
   template: 
@@ -35,6 +35,11 @@
   template: 
     src=storage-schemas.conf.j2
     dest=/opt/graphite/conf/storage-schemas.conf
+
+- name: configure graphite-web wsgi
+  file: 
+    src=graphite.wsgi
+    dest=/opt/graphite/conf/graphite.wsgi
 
 - name: configure graphite local_settings.py
   template:
