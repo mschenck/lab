@@ -1,6 +1,2 @@
 ---
 allow_duplicates: yes
-#dependencies:
-#  - { role: monit,
-#      name: "{{ name }}",
-#      pidfile: '/var/run/{{ name }}.pid' }
