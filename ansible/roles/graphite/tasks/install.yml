@@ -1,0 +1,38 @@
+---
+ 
+- name: install whisper
+  pip: 
+    name=whisper
+    state=present
+  
+- name: install carbon
+  pip:
+    name=carbon
+    state=present
+
+- name: install graphite-web
+  pip: 
+    name=graphite-web
+    state=present
+
+- name: install graphite-web python dependencies
+  pip:
+    name={{ item }}
+    state=present
+  with_items:
+    - django
+    - django-tagging
+
+- name: install graphite-web rpm dependencies
+  yum:
+    name={{ item }}
+    state=present
+  with_items:
+    - fontconfig
+    - pycairo
+
+- name: graphite syncdb
+  command: python manage.py syncdb --noinput
+  args:
+    chdir=/opt/graphite/webapp/graphite
+    creates=/opt/graphite/storage/graphite.db
