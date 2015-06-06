@@ -1,0 +1,74 @@
+#!/bin/sh
+# {{ ansible_managed }}
+#
+# {{ name }} - this script starts and stops the {{ name }} (gunicorn)
+#
+# chkconfig:   - 85 15 
+# description: {{ name }} is an gunicorn run python application
+# processname: {{ name }}
+# pidfile:     /var/run/{{ name }}.pid
+ 
+PYTHONPATH={{ app_root }}
+GUNICORN={{ gunicorn_path | default("/usr/bin/gunicorn") }}
+APP_MODULE={{ name }}_wsgi:application
+BIND_ADDR={{ uwsgi_addr | default("127.0.0.1") }}
+BIND_PORT={{ uwsgi_port | default(8000) }}
+PIDFILE=/var/run/{{ name }}.pid
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+ 
+# Source networking configuration.
+. /etc/sysconfig/network
+ 
+# Check that networking is up.
+[ "$NETWORKING" = "no" ] && exit 0
+
+lockfile=/var/lock/subsys/{{ name }}
+
+start() {
+  [ -x $GUNICORN ] || exit 5
+  daemon $GUNICORN $APP_MODULE --bind $BIND_ADDR:$BIND_PORT --pid $PIDFILE
+  retval=$?
+    [ $retval -eq 0 ] && touch $lockfile
+    return $retval
+}
+
+stop() {
+    echo -n $"Stopping {{ name }}: "
+    killproc -p $PIDFILE -QUIT
+    retval=$?
+    echo
+    [ $retval -eq 0 ] && rm -f $lockfile
+    return $retval
+}
+ 
+restart() {
+    stop
+    sleep 1
+    start
+}
+
+rh_status() {
+    status -p $PIDFILE
+}
+ 
+case "$1" in
+    start)
+        rh_status_q && exit 0
+        $1
+        ;;
+    stop)
+        rh_status_q || exit 0
+        $1
+        ;;
+    restart)
+        $1
+        ;;
+    status)
+        rh_status
+        ;;
+    *)
+        echo $"Usage: $0 {start|stop|status|restart}"
+        exit 2
+esac
