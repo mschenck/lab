@@ -1,19 +1,25 @@
 ---
 
-- name: install carbon
-  pip: 
-    name=carbon
-    state=present
-
 - name: install whisper
   pip: 
     name=whisper
     state=present
   
+- name: install carbon
+  pip:
+    name=carbon
+    state=present
+
 - name: install graphite-web
   pip: 
     name=graphite-web
     state=present
+
+- name: carbon-cache init script
+  copy:
+    src=carbon-cache.init
+    dest=/etc/init.d/carbon-cache
+    mode=0755
 
 - name: configure carbon.conf
   template: 
@@ -29,3 +35,9 @@
   template:
     src=local_settings.py.j2
     dest=/opt/graphite/webapp/graphite/local_settings.py
+
+- name: enable and start carbon-cache
+  service:
+    name=carbon-cache
+    enabled=yes
+    state=started
