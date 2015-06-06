@@ -1,5 +1,7 @@
 ---
 
+- include: install.yml
+
 - name: monit "{{ name }}" monit.d
   template:
     src: monit.d.j2
