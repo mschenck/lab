@@ -5,4 +5,4 @@
 - name: gunicorn {{ name }} wsgi
   template:
     src="{{ name }}.wsgi.j2"
-    dest="{{ dest }}/{{ name }}.wsgi"
+    dest="{{ app_root }}/{{ name }}_wsgi.py"
