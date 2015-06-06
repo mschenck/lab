@@ -15,11 +15,23 @@
     name=graphite-web
     state=present
 
-- name: install gunicorn
+- name: install graphite-web python dependencies
   pip:
-    name=gunicorn
+    name={{ item }}
     state=present
+  with_items:
+    - gunicorn
+    - django
+    - django-tagging
 
+- name: install graphite-web rpm dependencies
+  yum:
+    name={{ item }}
+    state=present
+  with_items:
+    - fontconfig
+    - pycairo
+ 
 - name: carbon-cache init script
   copy:
     src=carbon-cache.init
