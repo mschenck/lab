@@ -1,7 +1,8 @@
 FROM centos:7
 
 # Install ansible
-RUN yum install -y ansible
+RUN yum install -y python-setuptools python-devel gcc
+RUN easy_install ansible
 
 # Install git
 RUN yum install -y git
