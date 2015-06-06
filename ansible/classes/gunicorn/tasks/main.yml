@@ -12,6 +12,7 @@
     src: "gunicorn.init.j2"
     dest: "/etc/init.d/{{ name }}"
     mode: 0755
+  notify: reload monit
 
 #- name: enable and start "{{ name }}"
 #  service:
