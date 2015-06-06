@@ -1,4 +1,5 @@
 ---
+allow_duplicates: yes
 #dependencies:
 #  - { role: monit,
 #      name: "{{ name }}",
