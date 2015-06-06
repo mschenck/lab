@@ -10,6 +10,7 @@
 # pidfile:     /var/run/monit.pid
 
 MONIT=/usr/bin/monit
+CONFIG=/etc/monitrc
 PIDFILE=/var/run/monit.pid
 
 # Source function library.
@@ -26,7 +27,7 @@ lockfile=/var/lock/subsys/monit
 start() {
     [ -x $MONIT ] || exit 5
     echo -n $"Starting monit: "
-    $MONIT -I
+    $MONIT -p $PIDFILE -c $CONFIG
     retval=$?
     [ $retval -eq 0 ] && touch $lockfile
     return $retval
@@ -42,11 +43,16 @@ stop() {
 
 }
 
+configtest() {
+  $MONIT -t -c $CONFIG
+}
+ 
 reload() {
     $MONIT reload
 }
 
 restart() {
+    configtest || return $?
     stop
     sleep 1
     start
@@ -73,13 +79,13 @@ case "$1" in
         rh_status_q && exit 7
         $1
         ;;
-    restart)
+    restart:configtest)
         $1
         ;;
     status)
         rh_status
         ;;
     *)
-        echo $"Usage: $0 {start|stop|status|restart}"
+        echo $"Usage: $0 {start|stop|status|configtest|restart}"
         exit 2
 esac
