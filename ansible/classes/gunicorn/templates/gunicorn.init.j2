@@ -54,6 +54,10 @@ restart() {
 rh_status() {
     status -p $PIDFILE
 }
+
+rh_status_q() {
+    rh_status >/dev/null 2>&1
+}
  
 case "$1" in
     start)
@@ -61,7 +65,7 @@ case "$1" in
         $1
         ;;
     stop)
-        rh_status_q || exit 0
+        rh_status_q && exit 0
         $1
         ;;
     restart)

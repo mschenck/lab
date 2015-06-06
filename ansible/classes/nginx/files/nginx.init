@@ -1,4 +1,5 @@
 #!/bin/sh
+# {{ ansible_managed }}
 #
 # nginx - this script starts and stops the nginx daemon
 #
@@ -126,4 +127,6 @@ case "$1" in
     *)
         echo $"Usage: $0 {start|stop|status|restart|condrestart|try-restart|reload|force-reload|configtest}"
         exit 2
+        ;;
 esac
+exit $?
