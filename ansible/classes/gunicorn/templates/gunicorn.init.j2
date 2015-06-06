@@ -30,7 +30,7 @@ start() {
     [ -x $GUNICORN ] || exit 5
     echo -n $"Starting {{ name }}: "
     cd "{{ app_root }}/{{ name }}"
-    daemon $GUNICORN $APP_MODULE --bind $BIND_ADDR:$BIND_PORT --pid $PIDFILE
+    daemon $GUNICORN $APP_MODULE --bind $BIND_ADDR:$BIND_PORT --pid $PIDFILE -D
     retval=$?
     [ $retval -eq 0 ] && touch $lockfile
     return $retval
