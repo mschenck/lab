@@ -2,7 +2,7 @@
 
 - include: install.yml
 
-- name: nginx {{ name }} conf.d
+- name: nginx "{{ name }}" conf.d
   template:
     src: "{{ name }}.conf.j2"
     dest: "/etc/nginx/conf.d/{{ name }}.conf"
