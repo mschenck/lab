@@ -17,7 +17,7 @@
 # Check that networking is up.
 [ "$NETWORKING" = "no" ] && exit 0
 
-exec="/usr/bin/carbon-cache.py"
+exec="/opt/graphite/bin/carbon-cache.py"
 prog=$(basename "$exec")
 CARBON_CONFIG_PATH="/opt/graphite/conf/carbon.conf"
 CARBON_CACHE_ARGS=""
