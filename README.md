@@ -16,6 +16,7 @@ Local runs, i.e.:
 Build from `Dockerfile` in each `docker/<role>/` directory.
 
 I.e.
+
     docker build -t mschenck/graphite:latest .
 
 ### RPM builds
