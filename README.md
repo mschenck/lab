@@ -21,7 +21,7 @@ I.e.
 
 Running an instance with dynamic port association
 
-  docker run -d -P mschenck/graphite
+    docker run -d -P mschenck/graphite
 
 ### RPM builds
 
