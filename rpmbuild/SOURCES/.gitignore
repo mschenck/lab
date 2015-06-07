@@ -2,3 +2,7 @@
 *
 # Except this file
 !.gitignore
+!*patch*
+!*.init
+!*.logrotate
+!*.sysconfig
