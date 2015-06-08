@@ -1,3 +1,9 @@
 graphite:
   timezone: "America/New_York"
   uwsgi_port: 8000
+
+carbon_cache:
+  storage_schemas:
+    default:
+      pattern: ".*"
+      retentions: "10s:14d"

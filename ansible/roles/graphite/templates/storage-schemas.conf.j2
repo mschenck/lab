@@ -1,5 +1,8 @@
 # {{ ansible_managed }}
 
-[default]
-pattern = .*
-retentions = 10s:14d
+{% for (schema, settings) in carbon_cache.storage_schemas.viewitems() -%}
+[{{ schema }}]
+pattern = {{ settings.pattern }}
+retentions =  {{ settings.retentions }}
+
+{% endfor -%}
