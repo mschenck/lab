@@ -15,6 +15,3 @@ RUN /etc/init.d/monit start
 
 # export http, https and carbon-cache
 EXPOSE 80 443 2003
-
-# make interactive
-ENTRYPOINT ["/bin/bash"]
