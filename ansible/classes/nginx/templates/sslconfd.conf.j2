@@ -4,8 +4,8 @@ server {
   listen              {{ listen | default(443) }} ssl;
   ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
   ssl_ciphers         {{tls.ciphers.enabled|join(':')}}:!{{tls.ciphers.disabled|join(':!')}};
-  ssl_certificate     {{ ssl_cert }};
-  ssl_certificate_key {{ ssl_key }};
+  ssl_certificate     /etc/pki/CA/certs/{{ ssl_cert|default(ansible_hostname) }}.cert;
+  ssl_certificate_key /etc/pki/CA/certs/{{ ssl_key|default(ansible_hostname) }}.key;
 
   location / {
     proxy_set_header X-Forwarded-Host  $server_name;
