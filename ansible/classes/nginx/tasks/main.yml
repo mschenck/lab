@@ -8,6 +8,7 @@
     dest: "/etc/nginx/conf.d/{{ name }}.conf"
   notify:
     - restart nginx
+  tags: nginx
 
 - name: remove default.conf
   file:
@@ -15,3 +16,4 @@
     state: absent
   notify:
     - restart nginx
+  tags: nginx
