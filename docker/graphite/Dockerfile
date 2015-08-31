@@ -1,4 +1,5 @@
 FROM centos:7
+MAINTAINER Michael Schenck <mschenck@gmail.com>
 
 # Install ansible
 RUN yum install -y python-setuptools python-devel gcc
