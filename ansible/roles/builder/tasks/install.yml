@@ -1,7 +1,11 @@
 ---
 
-- name: install rpm-build
+- name: install build tools
   yum:
-    name: rpm-build
-    state: latest
+    name: "{{item}}"
+    state: latst
   tags: builder
+  with_items:
+    - rpm-build
+    - tito
+    - mock
