@@ -3,7 +3,7 @@
 - name: install build tools
   yum:
     name: "{{item}}"
-    state: latst
+    state: latest
   tags: builder
   with_items:
     - rpm-build
