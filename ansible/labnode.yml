@@ -1,0 +1,8 @@
+---
+
+# Lab node
+
+- hosts: all
+  roles:
+    - common
+    - docker
