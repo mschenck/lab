@@ -2,7 +2,7 @@
 
 # Lab node
 
-- hosts: all
+- hosts: labnodes
   roles:
     - common
     - docker
