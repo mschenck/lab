@@ -1,11 +1,15 @@
 ---
 
+- include: selinux.yml
+
 - name: install epel
+  tags: common
   yum:
     name: "http://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"
     state: present
 
 - name: install base RPMs
+  tags: common
   yum:
     name: "{{ item }}"
     state: present
@@ -16,5 +20,6 @@
     - initscripts
 
 - name: install pip
+  tags: common
   easy_install:
     name: pip

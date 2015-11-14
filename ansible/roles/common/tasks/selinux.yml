@@ -1,0 +1,7 @@
+---
+
+- name: set SELinux state
+  tags: common
+  selinux:
+    policy: "{{ selinux_policy }}"
+    state: "{{ selinux_state }}"
