@@ -1,0 +1,14 @@
+---
+
+- name: install docker
+  tags: docker
+  yum:
+    name: docker
+    state: present
+
+- name: load "overlay" kernel module when using overlyfs storage
+  tags: docker
+  modprobe:
+    name: overlay
+    state: present
+  when: ansible_virtualization_role == "host"

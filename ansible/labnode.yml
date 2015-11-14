@@ -3,6 +3,24 @@
 # Lab node
 
 - hosts: labnodes
+
+  vars:
+
+    docker_storage_driver: overlay
+
+    # Docker STORAGE_DRIVER set to "overlay" is incompatible with SELinux
+    selinux_state: permissive
+
   roles:
-    - common
-    - docker
+
+    # common
+    - {
+        role: common,
+        selinux_state: "{{ selinux_state }}",
+      }
+
+    # docker
+    - {
+        role: docker,
+        docker_storage_driver: "{{ docker_storage_driver }}",
+      }
