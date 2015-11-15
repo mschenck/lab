@@ -1,20 +1,22 @@
-FROM centos:7
+FROM centos
 MAINTAINER Michael Schenck <mschenck@gmail.com>
 
-# Install ansible
-RUN yum install -y python-setuptools python-devel gcc
-RUN easy_install pip
-RUN pip install ansible
+# Install git and ansible
+RUN touch /var/lib/rpm/* ; \
+    yum install -y python-setuptools python-devel gcc git
 
-# Install git
-RUN yum install -y git
-
-# Clone lab repo and run graphite playbook
-RUN cd /opt ; git clone https://github.com/mschenck/lab.git
-RUN cd /opt/lab/ansible ; ansible-playbook -i "localhost," -c local graphite.yml
+RUN easy_install pip ; \
+    pip install ansible
 
 # export http and carbon-cache
 EXPOSE 80 2003
 
-# Start services
-ENTRYPOINT ["/usr/bin/monit", "-I"]
+# Clone lab repo and run graphite playbook
+RUN cd /opt ; \
+    git clone https://github.com/mschenck/lab.git ; \
+    cd /opt/lab/ansible ; \
+    ansible-playbook -i "localhost," -c local graphite.yml
+
+
+# start monit interactively
+CMD [ "/usr/bin/monit", "-I" ]
