@@ -1,9 +1,15 @@
 ---
 
+- name: install docker YUM repo
+  copy:
+    src: docker.repo
+    dest: /etc/yum.repos.d/docker.repo
+    mode: 0644
+
 - name: install docker
   tags: docker
   yum:
-    name: docker
+    name: docker-engine
     state: present
 
 - name: load "overlay" kernel module when using overlyfs storage
