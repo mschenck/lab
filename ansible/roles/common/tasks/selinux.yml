@@ -1,5 +1,11 @@
 ---
 
+- name: install libselinux-python
+  tags: common
+  yum:
+    name: libselinux-python
+    state: present
+
 - name: set SELinux state
   tags: common
   selinux:

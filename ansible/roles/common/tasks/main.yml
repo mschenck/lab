@@ -14,10 +14,13 @@
     name: "{{ item }}"
     state: present
   with_items:
+    - git
+    - htop
+    - initscripts
+    - net-tools
     - python-setuptools
     - python-devel
-    - git
-    - initscripts
+    - vim-enhanced
 
 - name: install pip
   tags: common
