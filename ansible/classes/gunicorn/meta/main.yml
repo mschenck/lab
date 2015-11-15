@@ -1,2 +1,6 @@
 ---
 allow_duplicates: yes
+dependencies:
+  - { role: monit,
+      name: gunicorn,
+      pidfile: '/var/run/gunicorn.pid' }
