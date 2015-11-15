@@ -1,3 +1,4 @@
 ---
 - name: restart "{{ name }}"
   command: "/etc/init.d/{{ name }} restart" 
+  when: ansible_virtualization_type != "docker"

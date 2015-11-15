@@ -11,8 +11,9 @@
     dest: /etc/init.d/monit
     mode: 0755
 
-#- name: start and enable monit service
-#  service:
-#    name: monit
-#    enabled: yes
-#    state: started
+- name: start and enable monit service
+  service:
+    name: monit
+    enabled: yes
+    state: started
+  when: ansible_virtualization_type != "docker"
