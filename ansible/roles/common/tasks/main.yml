@@ -18,6 +18,7 @@
     - net-tools
     - python-setuptools
     - python-devel
+    - sysstat
     - vim-enhanced
 
 - name: install pip
