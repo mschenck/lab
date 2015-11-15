@@ -1,3 +1,4 @@
 ---
 - name: restart nginx
   command: monit restart nginx
+  when: ansible_virtualization_type != "docker"
