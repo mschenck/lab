@@ -14,5 +14,4 @@
 - name: start and enable monit service
   service:
     name: monit
-    enabled: yes
     state: started
