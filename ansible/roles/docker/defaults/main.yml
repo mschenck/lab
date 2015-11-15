@@ -1,5 +1,11 @@
 ---
 
-docker_storage_driver: ""
+# SELinux state/policy management settings
 
+selinux_state: enforcing
+selinux_policy: targeted
+
+# Docker settings
+
+docker_storage_driver: ""
 docker_storage_devs:

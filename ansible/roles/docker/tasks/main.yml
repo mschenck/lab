@@ -1,5 +1,7 @@
 ---
 
+- include: selinux.yml
+
 - include: install.yml
 
 - name: sysconfig docker

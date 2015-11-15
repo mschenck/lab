@@ -1,6 +1,1 @@
 ---
-
-# SELinux state/policy management settings
-
-selinux_state: enforcing
-selinux_policy: targeted

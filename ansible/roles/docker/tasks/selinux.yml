@@ -1,7 +1,7 @@
 ---
 
 - name: install libselinux-python
-  tags: common
+  tags: docker
   yum:
     name: libselinux-python
     state: present

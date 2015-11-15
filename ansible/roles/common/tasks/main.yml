@@ -1,7 +1,5 @@
 ---
 
-- include: selinux.yml
-
 - name: install epel
   tags: common
   yum:

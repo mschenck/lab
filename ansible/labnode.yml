@@ -16,11 +16,11 @@
     # common
     - {
         role: common,
-        selinux_state: "{{ selinux_state }}",
       }
 
     # docker
     - {
         role: docker,
+        selinux_state: "{{ selinux_state }}",
         docker_storage_driver: "{{ docker_storage_driver }}",
       }
