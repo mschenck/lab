@@ -9,6 +9,7 @@
     - whisper
     - carbon
     - graphite-web
+    - pytz
   
 - name: install graphite-web python dependencies
   tags: graphite
