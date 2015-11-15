@@ -1,21 +1,17 @@
 ---
  
-- name: install whisper
+- name: install whisper, carbon, and graphite-web
+  tags: graphite
   pip: 
-    name: whisper
+    name: "{{ item }}"
     state: present
+  with_items:
+    - whisper
+    - carbon
+    - graphite-web
   
-- name: install carbon
-  pip:
-    name: carbon
-    state: present
-
-- name: install graphite-web
-  pip: 
-    name: graphite-web
-    state: present
-
 - name: install graphite-web python dependencies
+  tags: graphite
   pip:
     name: "{{ item }}"
     state: present
@@ -24,6 +20,7 @@
     - django-tagging
 
 - name: install graphite-web rpm dependencies
+  tags: graphite
   yum:
     name: "{{ item }}"
     state: present
@@ -32,6 +29,7 @@
     - pycairo
 
 - name: graphite syncdb
+  tags: graphite
   command: python manage.py syncdb --noinput
   args:
     chdir: /opt/graphite/webapp/graphite
