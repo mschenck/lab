@@ -6,7 +6,7 @@
 
   vars:
 
-    docker_storage_driver: overlay
+    docker_storage_driver: devicemapper
 
     # Docker STORAGE_DRIVER set to "overlay" is incompatible with SELinux
     selinux_state: permissive

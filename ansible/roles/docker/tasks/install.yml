@@ -17,4 +17,5 @@
   modprobe:
     name: overlay
     state: present
-  when: ansible_virtualization_role == "host"
+  when: ansible_virtualization_role == "host" and docker_storage_driver == "overlay"
+
