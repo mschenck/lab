@@ -15,6 +15,7 @@
     - git
     - htop
     - initscripts
+    - lshw
     - lsof
     - net-tools
     - python-setuptools
