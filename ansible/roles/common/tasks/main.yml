@@ -15,10 +15,13 @@
     - git
     - htop
     - initscripts
+    - lshw
+    - lsof
     - net-tools
     - python-setuptools
     - python-devel
     - sysstat
+    - tcpdump
     - vim-enhanced
 
 - name: install pip

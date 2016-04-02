@@ -7,5 +7,5 @@ selinux_policy: targeted
 
 # Docker settings
 
-docker_storage_driver: ""
+docker_storage_driver: "devicemapper"
 docker_storage_devs:
