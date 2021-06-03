@@ -68,6 +68,19 @@ resource "aws_internet_gateway" "inet-gw" {
   vpc_id = aws_vpc.stack.id
 }
 
+resource "aws_default_route_table" "inet-route" {
+  default_route_table_id = aws_vpc.stack.default_route_table_id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.inet-gw.id
+  }
+
+  depends_on = [
+    aws_internet_gateway.inet-gw,
+  ]
+}
+
 resource "aws_eip" "nat-gw-1" {
   vpc = true
 }
