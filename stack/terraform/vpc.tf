@@ -61,7 +61,6 @@ resource "aws_eip" "nat-gw-1" {
 }
 
 resource "aws_nat_gateway" "stack-nat-gw-1" {
-  vpc_id        = aws_vpc.stack.id
   allocation_id = aws_eip.nat-gw-1.id
   subnet_id     = aws_subnet.stack-1.id
 }
@@ -71,7 +70,6 @@ resource "aws_eip" "nat-gw-2" {
 }
 
 resource "aws_nat_gateway" "stack-nat-gw-2" {
-  vpc_id        = aws_vpc.stack.id
   allocation_id = aws_eip.nat-gw-2.id
   subnet_id     = aws_subnet.stack-2.id
 }
@@ -81,7 +79,6 @@ resource "aws_eip" "nat-gw-3" {
 }
 
 resource "aws_nat_gateway" "stack-nat-gw-3" {
-  vpc_id        = aws_vpc.stack.id
   allocation_id = aws_eip.nat-gw-3.id
   subnet_id     = aws_subnet.stack-3.id
 }
