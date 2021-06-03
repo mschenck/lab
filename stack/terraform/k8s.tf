@@ -33,7 +33,8 @@ resource "aws_eks_cluster" "stack-eks" {
   role_arn = aws_iam_role.stack-k8s-cluster.arn
 
   vpc_config {
-    subnet_ids = data.aws_subnet_ids.stack.ids
+    subnet_ids              = data.aws_subnet_ids.stack.ids
+    endpoint_private_access = true
   }
 
   depends_on = [
