@@ -110,3 +110,15 @@ output "endpoint" {
 output "kubeconfig-certificate-authority-data" {
   value = "aws_eks_cluster.${var.project_name}.certificate_authority[0].data"
 }
+
+# EKS Auth
+data "aws_eks_cluster_auth" "stack" {
+  name = "${var.cluster_name}"
+}
+
+provider "kubernetes" {
+  host                   = "data.aws_eks_cluster.${var.project_name}.endpoint"
+  cluster_ca_certificate = base64decode("data.aws_eks_cluster.${var.project_name}.certificate_authority[0].data")
+  token                  = "data.aws_eks_cluster_auth.${var.project_name}.token"
+  load_config_file       = false
+}
