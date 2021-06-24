@@ -22,6 +22,9 @@ This pulls an kubeconfig (stored as `kube.config`) from AWS EKS
     aws eks update-kubeconfig --name stack-cluster --kubeconfig=kube.config
 
 
+NOTE: optionally set KUBECONFIG via `export KUBECONFIG=$(pwd)/kube.config`
+
+
 Deploy k8s dashboard
 --------------------
 
@@ -77,9 +80,9 @@ Checkout [ArtifactHUB](https://artifacthub.io/packages/search?kind=0) for reposi
 ## expose prometheus and alertmanager
 
     kubectl --kubeconfig=kube.config port-forward \
-            --namespace default svc/kube-prometheus-1624463107-prometheus 9090:9090 &
+            --namespace default svc/kube-prometheus-prometheus 9090:9090 &
     kubectl --kubeconfig=kube.config port-forward \
-            --namespace default svc/kube-prometheus-1624463107-alertmanager 9093:9093 &
+            --namespace default svc/kube-prometheus-alertmanager 9093:9093 &
 
 
 
