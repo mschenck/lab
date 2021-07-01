@@ -83,9 +83,10 @@ resource "aws_eks_node_group" "stack-eks" {
   node_group_name = "${var.project_name}-nodes"
   node_role_arn   = aws_iam_role.stack-k8s-worker.arn
   subnet_ids      = data.aws_subnet_ids.stack.ids
+  instance_types  = ["t2.small"]
 
   scaling_config {
-    desired_size = 2
+    desired_size = 3
     max_size     = 3
     min_size     = 2
   }
