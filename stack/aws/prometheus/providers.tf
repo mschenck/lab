@@ -7,11 +7,6 @@ terraform {
   }
 }
 
-#provider "helm" {
-#  kubernetes {
-#    config_path = "./kube.config"
-#  }
-#}
 provider "helm" {
   kubernetes {
     host                   = var.k8s_host
