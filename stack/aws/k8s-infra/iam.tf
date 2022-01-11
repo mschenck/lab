@@ -16,13 +16,13 @@ resource "aws_iam_policy" "k8s-api" {
   })
 }
 
-resource "aws_iam_group" "k8sers" {
-  name = "k8sers"
-  path = "/k8sers/"
+resource "aws_iam_group" "k8users" {
+  name = "k8users"
+  path = "/k8users/"
 }
  
 resource "aws_iam_policy_attachment" "api-access" {
   name       = "k8s api access attachment"
-  groups     = [aws_iam_group.k8sers.name]
+  groups     = [aws_iam_group.k8users.name]
   policy_arn = aws_iam_policy.k8s-api.arn
 }
