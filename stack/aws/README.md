@@ -4,6 +4,11 @@ k8s "stack" notes
 Setup/Teardown
 --------------
 
+## Setup Terraform state/locking
+
+    cd terraform-init
+    terraform apply --auto-approve
+
 ## Start up cluster with Terraform
 
     terraform apply --auto-approve
