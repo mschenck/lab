@@ -1,8 +1,10 @@
-k8s "stack" notes
-=================
+AWS - k8s "stack" notes
+=======================
 
 Setup/Teardown
 --------------
+
+NOTE: Bug with teardown, some manual intervention needed.
 
 ## Setup Terraform state/locking
 
