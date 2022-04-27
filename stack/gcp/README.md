@@ -53,3 +53,7 @@ Fix:
     gcloud services enable container.googleapis.com
 
 
+
+Reference
+---------
+- [GCP cost calculator](https://cloud.google.com/products/calculator)
