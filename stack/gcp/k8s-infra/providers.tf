@@ -8,9 +8,9 @@ terraform {
 }
 
 provider "google" {
-  project = "stack-348418"
-  region  = "us-central1"
-  zone    = "us-central1-c"
+  project = var.project_id
+  region  = var.region
+  zone    = var.zones[0]
 }
 
 data "google_client_config" "default" {}

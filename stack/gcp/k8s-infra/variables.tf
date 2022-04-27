@@ -2,10 +2,6 @@ variable "project_id" {
   description = "The project ID to host the cluster in"
 }
 
-variable "cluster_name" {
-  description = "The name of the k8s cluster"
-}
-
 variable "region" {
   description = "The region of the k8s cluster"
 }
@@ -13,6 +9,10 @@ variable "region" {
 variable "zones" {
   type        = list(string)
   description = "The zones for the k8s cluster"
+}
+
+variable "cluster_name" {
+  description = "The name of the k8s cluster"
 }
 
 variable "network_name" {
