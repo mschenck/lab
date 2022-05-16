@@ -14,6 +14,7 @@ module "gke" {
   network_policy             = false
   horizontal_pod_autoscaling = true
   filestore_csi_driver       = false
+  regional                   = false # "false" equates to a "zonal" cluster
 
   node_pools = [
     {
