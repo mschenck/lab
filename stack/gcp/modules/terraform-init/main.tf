@@ -1,6 +1,6 @@
 resource "google_storage_bucket" "tfstate" {
-  name          = "stack-tfstate"
-  location      = "US-CENTRAL1"
+  name          = var.name
+  location      = var.region
   force_destroy = true
 
   versioning {
