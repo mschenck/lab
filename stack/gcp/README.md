@@ -35,7 +35,7 @@ Local Configuration
 
 ## Configure `kubectl`
 
-    gcloud container clusters get-credentials staging-gke-stack
+    gcloud container clusters get-credentials staging-gke-cluster
 
 
 Setup Issues
