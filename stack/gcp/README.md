@@ -30,8 +30,8 @@ Local Configuration
 ## Configure `gcloud`
 
     gcloud config set project stack-348418
-    gcloud config set compute/zone us-central1
     gcloud config set compute/region us-central1
+    gcloud config set compute/zone us-central1-a
 
 ## Configure `kubectl`
 
