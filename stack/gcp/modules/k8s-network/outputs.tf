@@ -14,9 +14,6 @@ output "subnetwork_name" {
   value = google_compute_subnetwork.subnetwork.name
 }
 
-output "k8s_svcs_subnet_name" {
-  value = var.k8s_svcs_subnet_name
-}
-output "k8s_pods_subnet_name" {
-  value = var.k8s_pods_subnet_name
+output "secondary_ip_range" {
+  value = var.vpc_secondary_ip_range
 }

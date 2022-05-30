@@ -9,7 +9,7 @@ variable "name" {
 
 variable "routing_mode" {
   description = "Pass-thru to resouce, see: https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network#routing_mode"
-  default = "REGIONAL"
+  default     = "REGIONAL"
 }
 
 
@@ -20,25 +20,10 @@ variable "region" {
 
 variable "vpc_subnet_cidr" {
   description = "The range of internal addresses that are owned by this subnetwork."
-  type = string
+  type        = string
 }
 
-variable "k8s_pods_subnet_name" {
-  description = "The secondary ip range to use for pods"
-  default     = "ip-range-pods"
-}
-
-variable "k8s_pods_subnet_cidr" {
-  description = "The range of internal addresses that are owned by this subnetwork."
-  type = string
-}
-
-variable "k8s_svcs_subnet_name" {
-  description = "The secondary ip range to use for services"
-  default     = "ip-range-svcs"
-}
-
-variable "k8s_svcs_subnet_cidr" {
-  description = "The range of internal addresses that are owned by this subnetwork."
-  type = string
+variable "vpc_secondary_ip_range" {
+  description = "The secondary ip ranges for this subnetwork"
+  type        = list(object({ range_name = string, ip_cidr_range = string }))
 }
