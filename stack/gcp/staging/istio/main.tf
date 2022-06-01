@@ -68,6 +68,7 @@ resource "helm_release" "istio_ingress" {
   namespace  = local.istio_ingress_namespace
 
   depends_on = [
+    kubernetes_namespace.istio-ingress,
     helm_release.istio_istiod
   ]
 }
