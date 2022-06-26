@@ -34,6 +34,11 @@ variable "max_node_count" {
   type        = number
 }
 
+variable "machine_type" {
+  description = "Instance type for cluster nodes"
+  default     = "e2-micro"
+}
+
 
 # Network
 variable "network_name" {
