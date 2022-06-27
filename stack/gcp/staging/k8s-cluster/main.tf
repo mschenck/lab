@@ -9,7 +9,8 @@ locals {
   # Compute
   node_pool_name = "staging-gke-default-nodes"
   min_node_count = 1
-  max_node_count = 1
+  max_node_count = 2
+  machine_type   = "e2-small"
 
   # Network
   network_name     = "staging-k8s-network"
@@ -32,6 +33,7 @@ module "k8s-cluster" {
   node_pool_name = local.node_pool_name
   min_node_count = local.min_node_count
   max_node_count = local.max_node_count
+  machine_type   = local.machine_type
 
   # Network
   network_name     = local.network_name
