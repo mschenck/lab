@@ -21,9 +21,10 @@ resource "google_container_node_pool" "default" {
     guest_accelerator = []
     image_type        = "COS_CONTAINERD"
     preemptible       = false
-    service_account   = google_service_account.cluster_service_account.email
     local_ssd_count   = 0
     machine_type      = var.machine_type
+    service_account   = google_service_account.cluster_service_account.email
+
     labels = {
       "cluster_name"      = var.cluster_name
       "default-node-pool" = "true"
