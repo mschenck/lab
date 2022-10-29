@@ -23,7 +23,7 @@ resource "google_container_node_pool" "default" {
     preemptible       = false
     service_account   = google_service_account.cluster_service_account.email
     local_ssd_count   = 0
-    machine_type      = "e2-medium"
+    machine_type      = var.machine_type
     labels = {
       "cluster_name"      = var.cluster_name
       "default-node-pool" = "true"

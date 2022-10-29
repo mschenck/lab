@@ -8,8 +8,8 @@ locals {
 
   # Compute
   node_pool_name = "staging-gke-default-nodes"
-  min_node_count = 2
-  max_node_count = 6
+  min_node_count = 1
+  max_node_count = 1
 
   # Network
   network_name     = "staging-k8s-network"

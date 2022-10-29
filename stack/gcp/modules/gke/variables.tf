@@ -34,6 +34,11 @@ variable "max_node_count" {
   type        = number
 }
 
+variable "machine_type" {
+  description = "The type of compute instance to use for k8s nodes."
+  default     = "e2-micro"
+}
+
 
 # Network
 variable "network_name" {
