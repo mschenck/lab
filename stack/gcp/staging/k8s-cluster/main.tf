@@ -32,6 +32,7 @@ module "k8s-cluster" {
   node_pool_name = local.node_pool_name
   min_node_count = local.min_node_count
   max_node_count = local.max_node_count
+  machine_type   = local.machine_type
 
   # Network
   network_name     = local.network_name

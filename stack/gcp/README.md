@@ -53,6 +53,11 @@ Fix:
     gcloud services enable container.googleapis.com
 
 
+TODOs
+-----
+
+[] Attach gke service account "staging-gke-service-account@stack-348418.iam.gserviceaccount.com" to container artifact repository
+
 
 Reference
 ---------

@@ -35,7 +35,7 @@ variable "max_node_count" {
 }
 
 variable "machine_type" {
-  description = "The type of compute instance to use for k8s nodes."
+  description = "Instance type for cluster nodes"
   default     = "e2-micro"
 }
 
