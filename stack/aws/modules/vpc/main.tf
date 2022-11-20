@@ -35,11 +35,35 @@ resource "aws_subnet" "subnet" {
   ]
 }
 
+resource "aws_internet_gateway" "gw" {
+  vpc_id = aws_vpc.main.id
+
+  tags = {
+    Name = var.name
+  }
+}
+
+resource "aws_default_route_table" "inet-route" {
+  default_route_table_id = aws_vpc.main.default_route_table_id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.gw.id
+  }
+
+  depends_on = [
+    aws_internet_gateway.gw,
+  ]
+}
 
 output "availability_zones" {
   value = join(", ", tolist(local.azs))
 }
 
 output "subnets" {
-  value = join(", ", tolist(aws_subnet.subnet[*].availability_zone))
+  value = tolist(aws_subnet.subnet[*])
+}
+
+output "vpc_id" {
+  value = aws_vpc.main.id
 }
