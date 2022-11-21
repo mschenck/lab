@@ -21,6 +21,5 @@ ENV PATH="/opt/google-cloud-sdk/bin:$PATH"
 
 # Golang
 RUN apk add go go-doc
-ENV GOROOT="/usr/lib/go"
-ENV GOPATH="$(pwd)/src"
+# RUN /usr/bin/go get -u -v golang.org/x/tools/cmd/gopls 2>&1
 #RUN gcloud components install app-engine-java kubectl
