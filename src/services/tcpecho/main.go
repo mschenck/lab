@@ -28,13 +28,16 @@ func main() {
 		listenPort   = os.Getenv("LISTEN_PORT")
 
 		// Setup listeners
-		proxy    = listener.ProxyListener{}
-		tcp      = listener.TcpListener{}
-		listener listener.Listener
+		autodetect = listener.AutoDetectListener{}
+		proxy      = listener.ProxyListener{}
+		tcp        = listener.TcpListener{}
+		listener   listener.Listener
 	)
 
 	fmt.Printf("isProxyProto: %q\n", isProxyProto)
-	if isProxyProto != "" {
+	if isProxyProto == "auto" {
+		listener = autodetect
+	} else if isProxyProto == "proxy" {
 		listener = proxy
 	} else {
 		listener = tcp
