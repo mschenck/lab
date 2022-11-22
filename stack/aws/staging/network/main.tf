@@ -37,3 +37,9 @@ module "perimeter" {
   number_instances = local.number_azs
   subnets          = local.subnets
 }
+
+// Container Registry
+module "registry" {
+  source = "../../modules/registry"
+  name = local.vpc_name
+}

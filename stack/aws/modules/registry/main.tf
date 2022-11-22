@@ -1,4 +1,4 @@
 resource "aws_ecr_repository" "stack" {
-  name                 = var.project_name
+  name                 = var.name
   image_tag_mutability = "MUTABLE"
 }
