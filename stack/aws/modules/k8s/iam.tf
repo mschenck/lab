@@ -82,6 +82,35 @@ resource "aws_iam_policy" "k8s-api" {
   })
 }
 
+
+resource "aws_iam_role_policy_attachment" "stack-ecr" {
+  policy_arn = aws_iam_policy.k8s-ecr.arn
+  role       = aws_iam_role.stack-k8s-worker.name
+}
+
+resource "aws_iam_policy" "k8s-ecr" {
+  name = "k8s-ecr-access"
+  path = "/"
+
+  policy = <<POLICY
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:BatchGetImage",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:GetAuthorizationToken"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+POLICY
+}
+
 resource "aws_iam_group" "k8users" {
   name = "k8users"
   path = "/k8users/"
