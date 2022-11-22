@@ -1,0 +1,107 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tcpecho_auto
+  labels:
+    app: tcpecho_auto
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: tcpecho_auto
+    spec:
+      containers:
+      - name: tcpecho_auto
+        image: 601467590780.dkr.ecr.us-east-1.amazonaws.com/tcpecho:latest
+        ports:
+        - containerPort: 1337
+        env:
+          - name: PROXY_PROTO
+            value: "auto"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tcpecho_proxy
+  labels:
+    app: tcpecho_proxy
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: tcpecho_proxy
+    spec:
+      containers:
+      - name: tcpecho_proxy
+        image: 601467590780.dkr.ecr.us-east-1.amazonaws.com/tcpecho:latest
+        ports:
+        - containerPort: 1337
+        env:
+          - name: PROXY_PROTO
+            value: "proxy"
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: tcpecho_tcp
+  labels:
+    app: tcpecho_tcp
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: tcpecho_tcp
+    spec:
+      containers:
+      - name: tcpecho_tcp
+        image: 601467590780.dkr.ecr.us-east-1.amazonaws.com/tcpecho:latest
+        ports:
+        - containerPort: 1337
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tcpecho_tcp
+  labels:
+    app: tcpecho_tcp
+spec:
+  ports:
+  - name: tcpecho_tcp
+    port: 1336
+    protocol: TCP
+    targetPort: 1337
+  selector:
+    app: tcpecho_tcp
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tcpecho_proxy
+  labels:
+    app: tcpecho_proxy
+spec:
+  ports:
+  - name: tcpecho_proxy
+    port: 1338
+    protocol: TCP
+    targetPort: 1337
+  selector:
+    app: tcpecho_proxy
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tcpecho_auto
+  labels:
+    app: tcpecho_auto
+spec:
+  ports:
+  - name: tcpecho_auto
+    port: 1337
+    protocol: TCP
+    targetPort: 1337
+  selector:
+    app: tcpecho_auto
