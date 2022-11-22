@@ -1,18 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tcpecho_auto
+  name: tcpecho-auto
   labels:
-    app: tcpecho_auto
+    app: tcpecho-auto
 spec:
+  selector:
+    matchLabels:
+      app: tcpecho-auto
   replicas: 3
   template:
     metadata:
       labels:
-        app: tcpecho_auto
+        app: tcpecho-auto
     spec:
       containers:
-      - name: tcpecho_auto
+      - name: tcpecho-auto
         image: 601467590780.dkr.ecr.us-east-1.amazonaws.com/tcpecho:latest
         ports:
         - containerPort: 1337
@@ -23,18 +26,21 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tcpecho_proxy
+  name: tcpecho-proxy
   labels:
-    app: tcpecho_proxy
+    app: tcpecho-proxy
 spec:
+  selector:
+    matchLabels:
+      app: tcpecho-proxy
   replicas: 3
   template:
     metadata:
       labels:
-        app: tcpecho_proxy
+        app: tcpecho-proxy
     spec:
       containers:
-      - name: tcpecho_proxy
+      - name: tcpecho-proxy
         image: 601467590780.dkr.ecr.us-east-1.amazonaws.com/tcpecho:latest
         ports:
         - containerPort: 1337
@@ -45,18 +51,21 @@ spec:
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
-  name: tcpecho_tcp
+  name: tcpecho-tcp
   labels:
-    app: tcpecho_tcp
+    app: tcpecho-tcp
 spec:
+  selector:
+    matchLabels:
+      app: tcpecho-tcp
   replicas: 3
   template:
     metadata:
       labels:
-        app: tcpecho_tcp
+        app: tcpecho-tcp
     spec:
       containers:
-      - name: tcpecho_tcp
+      - name: tcpecho-tcp
         image: 601467590780.dkr.ecr.us-east-1.amazonaws.com/tcpecho:latest
         ports:
         - containerPort: 1337
@@ -64,44 +73,44 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: tcpecho_tcp
+  name: tcpecho-tcp
   labels:
-    app: tcpecho_tcp
+    app: tcpecho-tcp
 spec:
   ports:
-  - name: tcpecho_tcp
+  - name: tcpecho-tcp
     port: 1336
     protocol: TCP
     targetPort: 1337
   selector:
-    app: tcpecho_tcp
+    app: tcpecho-tcp
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: tcpecho_proxy
+  name: tcpecho-proxy
   labels:
-    app: tcpecho_proxy
+    app: tcpecho-proxy
 spec:
   ports:
-  - name: tcpecho_proxy
+  - name: tcpecho-proxy
     port: 1338
     protocol: TCP
     targetPort: 1337
   selector:
-    app: tcpecho_proxy
+    app: tcpecho-proxy
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: tcpecho_auto
+  name: tcpecho-auto
   labels:
-    app: tcpecho_auto
+    app: tcpecho-auto
 spec:
   ports:
-  - name: tcpecho_auto
+  - name: tcpecho-auto
     port: 1337
     protocol: TCP
     targetPort: 1337
   selector:
-    app: tcpecho_auto
+    app: tcpecho-auto
