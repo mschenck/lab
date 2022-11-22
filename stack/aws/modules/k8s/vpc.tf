@@ -1,3 +1,29 @@
+data "aws_vpc" "stack" {
+  filter {
+    name   = "tag:Name"
+    values = [var.vpc_name]
+  }
+}
+
+data "aws_subnets" "stack" {
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.stack.id]
+  }
+}
+
+
+
+output "vpc" {
+  value = data.aws_vpc.stack
+}
+
+output "aws_subnets" {
+  value = data.aws_subnets.stack
+}
+
+
+/*
 resource "aws_vpc" "stack" {
   cidr_block           = "192.168.0.0/16"
   instance_tenancy     = "default"
@@ -53,16 +79,6 @@ resource "aws_subnet" "stack-3" {
   ]
 }
 
-data "aws_subnet_ids" "stack" {
-  vpc_id = aws_vpc.stack.id
-
-  depends_on = [
-    aws_vpc.stack,
-    aws_subnet.stack-1,
-    aws_subnet.stack-2,
-    aws_subnet.stack-3,
-  ]
-}
 
 resource "aws_internet_gateway" "inet-gw" {
   vpc_id = aws_vpc.stack.id
@@ -122,3 +138,4 @@ resource "aws_nat_gateway" "stack-nat-gw-3" {
     aws_internet_gateway.inet-gw,
   ]
 }
+*/

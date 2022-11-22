@@ -38,8 +38,3 @@ module "perimeter" {
   subnets          = local.subnets
 }
 
-// Container Registry
-module "registry" {
-  source = "../../modules/registry"
-  name = local.vpc_name
-}
