@@ -7,4 +7,4 @@ EXPOSE $PORT
 RUN apk add go
 RUN go install github.com/mschenck/lab/src/services/tcpecho@latest
 
-ENTRYPOINT [ "tcpecho" ]
+ENTRYPOINT [ "/root/go/bin/tcpecho" ]
