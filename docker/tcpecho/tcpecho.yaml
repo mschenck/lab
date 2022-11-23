@@ -49,7 +49,7 @@ spec:
             value: "proxy"
 ---
 apiVersion: apps/v1
-kind: ReplicaSet
+kind: Deployment
 metadata:
   name: tcpecho-tcp
   labels:
