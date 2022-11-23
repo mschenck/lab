@@ -14,8 +14,10 @@ module "registry" {
 module "k8s" {
   source = "../../modules/k8s"
 
-  key_name = local.key_name
-  vpc_name = local.vpc_name
+  key_name         = local.key_name
+  vpc_name         = local.vpc_name
+  instance_max     = 2
+  instance_desired = 2
 }
 
 
