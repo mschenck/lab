@@ -13,7 +13,7 @@ variable "cluster_name" {
 
 variable "instance_types" {
   type    = string
-  default = "t2.micro"
+  default = "t3.micro"
 }
 
 variable "instance_min" {
