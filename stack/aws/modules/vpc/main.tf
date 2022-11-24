@@ -13,9 +13,11 @@ data "aws_availability_zones" "all" {
 }
 
 resource "aws_vpc" "main" {
-  cidr_block           = var.cidr_block
-  instance_tenancy     = var.instance_tenancy
-  enable_dns_hostnames = var.enable_dns_hostnames
+  cidr_block       = var.cidr_block
+  instance_tenancy = var.instance_tenancy
+
+  enable_dns_hostnames             = var.enable_dns_hostnames
+  assign_generated_ipv6_cidr_block = true
 
   tags = {
     Name = var.name
@@ -26,9 +28,11 @@ resource "aws_subnet" "subnet" {
   vpc_id            = aws_vpc.main.id
   count             = local.num_azs
   availability_zone = data.aws_availability_zones.all.names[count.index]
-  cidr_block        = cidrsubnet(var.cidr_block, local.num_azs, count.index)
 
-  map_public_ip_on_launch = var.map_public_ips
+  cidr_block                      = cidrsubnet(var.cidr_block, local.num_azs, count.index)
+  ipv6_cidr_block                 = cidrsubnet(aws_vpc.main.ipv6_cidr_block, 8, count.index) # Setting 8 bits to ensure a /64
+  assign_ipv6_address_on_creation = true
+  map_public_ip_on_launch         = var.map_public_ips
 
   depends_on = [
     aws_vpc.main,
