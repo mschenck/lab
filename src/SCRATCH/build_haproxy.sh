@@ -122,5 +122,6 @@ nft add chain inet edgeports proxy { type filter hook input priority 0 \; policy
 
 nft add rule inet edgeports proxy meta iifname "lo" return
 nft add rule inet edgeports proxy meta iifname "eth0" return
-nft add rule inet edgeports proxy meta l4proto tcp ip tproxy to 127.0.0.1:7331
-nft add rule inet edgeports proxy meta l4proto tcp ip6 tproxy to 127.0.0.1:7331
+
+nft add rule inet edgeports proxy meta l4proto tcp tproxy ip to 127.0.0.1:7331
+nft add rule inet edgeports proxy meta l4proto tcp tproxy ip6 to ::1:7331
