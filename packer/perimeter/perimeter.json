@@ -1,0 +1,52 @@
+{
+  "variables": {
+    "ami_id": "ami-0b0dcb5067f052a63",
+    "instance_type": "t2.micro"
+  },
+  "builders": [
+    {
+      "ami_name": "perimeter-AMI",
+      "type": "amazon-ebs",
+      "ami_virtualization_type": "hvm",
+      "source_ami_filter": {
+        "filters": {
+          "virtualization-type": "hvm",
+          "name": "amzn2-ami-kernel-5.*-hvm-*-x86_64-ebs",
+          "root-device-type": "ebs"
+        },
+        "owners": [
+          "amazon"
+        ],
+        "most_recent": true
+      },
+      "associate_public_ip_address": true,
+      "instance_type": "{{ user `instance_type` }}",
+      "spot_price": "auto",
+      "ssh_username": "ec2-user",
+      "ssh_interface": "public_ip",
+      "tags": {
+        "OS_Version": "Amazon 2 linux",
+        "Application": "Perimeter Image",
+        "Runner": "EC2"
+      }
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": "sudo yum install -y rsyslog && sudo systemctl enable rsyslog"
+    },
+    {
+      "type": "shell",
+      "script": "./scripts/install_haproxy.sh"
+    },
+    {
+      "type": "shell",
+      "script": "./scripts/install_nftables.sh"
+    },
+    {
+      "type": "shell",
+      "script": "./scripts/install_nft_rules.sh"
+    }
+  ]
+}

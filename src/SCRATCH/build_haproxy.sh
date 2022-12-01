@@ -117,11 +117,8 @@ EOF
 
 # See [nft (8)](https://www.netfilter.org/projects/nftables/manpage.html)
 nft add table inet edgeports
-
 nft add chain inet edgeports proxy { type filter hook input priority 0 \; policy accept \; }
-
 nft add rule inet edgeports proxy meta iifname "lo" return
 nft add rule inet edgeports proxy meta iifname "eth0" return
-
 nft add rule inet edgeports proxy meta l4proto tcp tproxy ip to 127.0.0.1:7331
 nft add rule inet edgeports proxy meta l4proto tcp tproxy ip6 to ::1:7331
