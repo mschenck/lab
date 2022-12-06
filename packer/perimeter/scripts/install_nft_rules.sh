@@ -21,7 +21,7 @@ $NFT add chain inet edgeports proxy { type filter hook input priority 0 \; polic
 $NFT add rule inet edgeports proxy meta iifname "lo" return
 $NFT add rule inet edgeports proxy meta iifname "eth0" return
 $NFT add rule inet edgeports proxy meta l4proto tcp tproxy ip to 127.0.0.1:7331
-$NFT add rule inet edgeports proxy meta l4proto tcp tproxy ip6 to ::1:7331
+$NFT add rule inet edgeports proxy meta l4proto tcp tproxy ip6 to :::7331
 
 echo "--- Create tproxy.nft script"
 echo $(printf '#!' ; printf $NFT_FULLPATH) > $PREP_NFT_SCRIPT

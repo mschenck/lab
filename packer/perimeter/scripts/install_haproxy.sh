@@ -64,6 +64,7 @@ defaults
 
 frontend  tproxy
     bind            127.0.0.1:7331 transparent
+    bind            :::7331 transparent
     default_backend tcpserver
 EOF
 
