@@ -1,14 +1,6 @@
 locals {
   vpc_name = "staging"
-  services = ["tcpecho"]
   key_name = "windows-ubuntu"
-}
-
-// Container Registry
-module "registry" {
-  source   = "../../modules/registry"
-  for_each = toset(local.services)
-  name     = each.key
 }
 
 module "k8s" {

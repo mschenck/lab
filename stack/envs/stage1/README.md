@@ -12,10 +12,18 @@ Setup/Teardown
 
     cd terraform-init
     terraform apply --auto-approve
+    cd ..
+
+## Start up network with Terraform
+
+    cd network
+    terraform apply --auto-approve
+    cd ..
 
 
 ## Start up cluster with Terraform
 
+    cd k8s-cluster
     terraform apply --auto-approve
 
 

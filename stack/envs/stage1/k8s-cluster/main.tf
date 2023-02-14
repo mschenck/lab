@@ -21,7 +21,7 @@ locals {
 # use remote state for variables
 
 module "k8s-cluster" {
-  source = "../../modules/gke"
+  source = "../../../modules/gcp/gke"
 
   cluster_name       = local.name
   project_id         = local.project_id
@@ -32,7 +32,6 @@ module "k8s-cluster" {
   node_pool_name = local.node_pool_name
   min_node_count = local.min_node_count
   max_node_count = local.max_node_count
-  machine_type   = local.machine_type
 
   # Network
   network_name     = local.network_name

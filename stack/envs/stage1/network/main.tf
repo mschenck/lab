@@ -19,7 +19,7 @@ locals {
 }
 
 module "gke-network" {
-  source = "../../modules/k8s-network"
+  source = "../../../modules/gcp/k8s-network"
   name   = local.network_name
 
   project_id = local.project_id
