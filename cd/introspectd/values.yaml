@@ -5,7 +5,7 @@
 replicaCount: 2
 
 image:
-  repository: us-central1-docker.pkg.dev/stack-348418/container-registry-staging/introspectd
+  repository: ghcr.io/mschenck/introspectd
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
