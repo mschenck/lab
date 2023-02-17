@@ -1,0 +1,56 @@
+---
+resources:
+
+- name: lab-repo
+  type: git
+  icon: github
+  source:
+    uri: https://github.com/mschenck/lab.git
+    username: ((gh_user))
+    password: ((gh_pat))
+    branch: main
+
+- name: introspectd-image
+  type: registry-image
+  icon: docker
+  source:
+    repository: ghcr.io/mschenck/introspectd
+    username: ((gh_user))
+    password: ((gh_pat))
+    debug: true
+    tag: latest
+
+jobs:
+  - name: build-introspectd
+    plan:
+      - get: lab-repo
+        trigger: true
+
+      - task: build-container-image
+        privileged: true
+        config:
+          platform: linux
+
+          image_resource:
+            type: registry-image
+            source: 
+              repository: concourse/oci-build-task
+          
+          caches:
+            - path: cache
+
+          inputs:
+            - name: lab-repo
+          outputs:
+            - name: image
+
+          params:
+            CONTEXT: lab-repo/docker/introspectd
+            OUTPUT_OCI: true
+
+          run:
+            path: build
+
+      - put: introspectd-image
+        params:
+          image: image/image.tar
