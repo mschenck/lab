@@ -45,7 +45,7 @@ jobs:
             - name: image
 
           params:
-            CONTEXT: lab-repo/docker/introspectd
+            CONTEXT: lab-repo/services/introspectd
             OUTPUT_OCI: true
 
           run:
