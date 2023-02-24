@@ -8,5 +8,3 @@ module "TerraformState" {
   gcp_project = var.gcp_project
   gcp_region  = var.gcp_region
 }
-
-# Terraform state configuration
