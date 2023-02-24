@@ -12,7 +12,7 @@ variable "location" {
 }
 
 # Auth
-variable "service_account_id" {
+variable "service_account_name" {
   description = "RFC1035 compatible name for the k8s service account"
   type        = string
 }
@@ -27,11 +27,13 @@ variable "node_pool_name" {
 variable "min_node_count" {
   description = "Minimum number of nodes"
   type        = number
+  default     = 1
 }
 
 variable "max_node_count" {
   description = "Maximum number of nodes"
   type        = number
+  default     = 1
 }
 
 variable "machine_type" {
@@ -43,10 +45,12 @@ variable "machine_type" {
 # Network
 variable "network_name" {
   description = "The name of the k8s network"
+  type        = string
 }
 
 variable "subnetwork_name" {
   description = "The name of the k8s subnet"
+  type        = string
 }
 
 variable "pods_subnet_name" {

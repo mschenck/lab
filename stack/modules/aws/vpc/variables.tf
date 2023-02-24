@@ -20,7 +20,7 @@ variable "enable_dns_hostnames" {
   type    = bool
 }
 
-variable "aws_region" {
+variable "region" {
   default = "us-east-1"
   type    = string
 }

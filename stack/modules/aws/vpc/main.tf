@@ -8,7 +8,7 @@ locals {
 data "aws_availability_zones" "all" {
   filter {
     name   = "region-name"
-    values = [var.aws_region]
+    values = [var.region]
   }
 }
 

@@ -8,7 +8,8 @@ variable "vpc_name" {
 }
 
 variable "cluster_name" {
-  default = "stack-cluster"
+  description = "The name of the cluster"
+  type        = string
 }
 
 variable "instance_types" {

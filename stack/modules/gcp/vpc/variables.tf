@@ -6,6 +6,9 @@ variable "name" {
   description = "The name of this k8s network"
 }
 
+variable "subnetwork_name" {
+  description = "The name of the k8s subnet"
+}
 
 variable "routing_mode" {
   description = "Pass-thru to resouce, see: https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network#routing_mode"
