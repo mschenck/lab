@@ -19,14 +19,18 @@ Lab is broken out into Tiers, which build upon each other. A "tier" is a platfor
 
 Start by cloning this Git repository.
 
+### TerraformState (Tier 0)
+
 For shared Terraform state, start by deploying 0-TerraformState:
 
-Edit `stack/0-TerraformState/settings.auto.tfvars` then deploy the Tier:
+1. Copy `stack/0-TerraformState/settings.auto.tfvars-TEMPLATE` to `stack/0-TerraformState/settings.auto.tfvars`
+2. Edit `stack/0-TerraformState/settings.auto.tfvars`
+3. deploy Tier 0:
 
+```
     cd stack/0-TerraformState
     terraform init
     terraform apply
+```
 
-(Optional) Migrate 0-TerraformState to shared state.
-
-The directions will be presented in outputs from `terraform apply`.
+4. (Optional) Migrate 0-TerraformState to shared state.  The directions will be presented in outputs from `terraform apply`.

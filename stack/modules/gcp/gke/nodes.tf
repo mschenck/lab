@@ -1,7 +1,7 @@
 resource "google_container_node_pool" "default" {
   cluster            = var.cluster_name
   initial_node_count = var.min_node_count
-  location           = "us-central1-a"
+  location           = var.location
   name               = var.node_pool_name
   project            = var.project_id
 

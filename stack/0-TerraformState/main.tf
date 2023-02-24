@@ -4,7 +4,7 @@ module "TerraformState" {
   vendor = var.tf_state_vendor
   name   = var.tf_state_name
 
-  # Only used when "vendor" set to "GCP"
+  # GCP-specific variables
   gcp_project = var.gcp_project
   gcp_region  = var.gcp_region
 }

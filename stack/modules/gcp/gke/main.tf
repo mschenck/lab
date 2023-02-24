@@ -12,11 +12,10 @@ resource "google_container_cluster" "primary" {
   logging_service    = "logging.googleapis.com/kubernetes"
   monitoring_service = "monitoring.googleapis.com/kubernetes"
 
-  default_max_pods_per_node   = 110
-  enable_binary_authorization = false
-  enable_kubernetes_alpha     = false
-  enable_legacy_abac          = false
-  enable_shielded_nodes       = true
+  default_max_pods_per_node = 110
+  enable_kubernetes_alpha   = false
+  enable_legacy_abac        = false
+  enable_shielded_nodes     = true
 
   # Disable automatic node_pool
   remove_default_node_pool = true
