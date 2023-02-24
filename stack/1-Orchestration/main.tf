@@ -17,6 +17,8 @@ module "Orchestration" {
   cluster_name = local.cluster_name
   network_name = local.network_name
 
+  # Network variables
+  nodes_cidr_block = var.nodes_subnet_cidr
   pods_subnet_cidr = var.pods_subnet_cidr
   svcs_subnet_cidr = var.svcs_subnet_cidr
 

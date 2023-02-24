@@ -8,6 +8,11 @@ resource "aws_eks_cluster" "stack" {
     endpoint_private_access = true
   }
 
+  kubernetes_network_config {
+    service_ipv4_cidr = var.svcs_subnet_cidr
+  }
+
+
   depends_on = [
     aws_iam_role_policy_attachment.stack-AmazonEKSClusterPolicy,
     aws_iam_role_policy_attachment.stack-AmazonEKSVPCResourceController,
@@ -16,7 +21,7 @@ resource "aws_eks_cluster" "stack" {
 
 resource "aws_eks_node_group" "stack" {
   cluster_name    = var.cluster_name
-  node_group_name = "${var.project_name}-nodes"
+  node_group_name = var.node_pool_name
   node_role_arn   = aws_iam_role.stack-k8s-worker.arn
   subnet_ids      = data.aws_subnets.stack.ids
   instance_types  = [var.instance_types]
@@ -32,6 +37,7 @@ resource "aws_eks_node_group" "stack" {
   }
 
   depends_on = [
+    aws_eks_cluster.stack,
     aws_iam_role_policy_attachment.stack-AmazonEKSWorkerNodePolicy,
     aws_iam_role_policy_attachment.stack-AmazonEKS_CNI_Policy,
     aws_iam_role_policy_attachment.stack-AmazonEC2ContainerRegistryReadOnly,
