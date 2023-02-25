@@ -13,7 +13,7 @@ module "aws-orchestration-network" {
   region = var.aws_region
 
   # IP Allocation
-  cidr_block = var.cidr_block
+  cidr_block = var.nodes_cidr_block
 
   count = var.vendor == "AWS" ? 1 : 0
 }
@@ -27,6 +27,12 @@ module "aws-orchestration-cluster" {
 
   instance_types = var.ec2_instance_type
   key_name       = var.ec2_key_name
+
+  # Network
+  svcs_subnet_cidr = var.svcs_subnet_cidr
+
+  # Compute
+  node_pool_name = var.gcp_node_pool_name
 
   depends_on = [
     module.aws-orchestration-network
@@ -47,7 +53,7 @@ module "gcp-orchestration-network" {
   region          = var.gcp_region
 
   # IP Allocation
-  vpc_subnet_cidr = var.cidr_block
+  vpc_subnet_cidr = var.nodes_cidr_block
   vpc_secondary_ip_range = [
     {
       range_name    = var.gcp_pods_subnet_name,

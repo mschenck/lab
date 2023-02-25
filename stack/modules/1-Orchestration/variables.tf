@@ -19,9 +19,8 @@ variable "network_name" {
   type        = string
 }
 
-variable "cidr_block" {
+variable "nodes_cidr_block" {
   description = "The name of the vpc"
-  default     = "10.0.0.0/16"
   type        = string
 }
 

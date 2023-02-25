@@ -12,6 +12,13 @@ variable "orchestration_name" {
   type        = string
 }
 
+# Network settings
+
+variable "nodes_subnet_cidr" {
+  description = "Subnet for k8s nodes (kubelets)"
+  type        = string
+}
+
 variable "pods_subnet_cidr" {
   description = "Subnet for k8s pods"
   type        = string
