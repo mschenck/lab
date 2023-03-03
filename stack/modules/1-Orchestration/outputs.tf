@@ -10,10 +10,16 @@ output "token" {
   value = var.vendor == "GCP" ? module.gcp-orchestration-cluster[*].client_token : module.aws-orchestration-cluster[*].token
 }
 
-# AWS-specific outputs
+output "auth_user" {
+  sensitive = true
 
-output "aws_ca_data" {
-  value = var.vendor == "AWS" ? module.aws-orchestration-cluster[*].ca_data : ["None"]
+  value = var.vendor == "GCP" ? module.gcp-orchestration-cluster[*].auth_user : module.aws-orchestration-cluster[*].auth_user
+}
+
+output "ca_data" {
+  sensitive = true
+
+  value = var.vendor == "AWS" ? module.aws-orchestration-cluster[*].ca_data : module.gcp-orchestration-cluster[*].ca_data
 }
 
 # GCP-specific outputs

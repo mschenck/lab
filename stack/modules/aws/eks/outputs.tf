@@ -28,6 +28,9 @@ output "ca_data" {
 }
 
 output "token" {
-  value = "data.aws_eks_cluster_auth.${var.project_name}.token"
+  value = data.aws_eks_cluster_auth.stack.token
 }
 
+output "auth_user" {
+  value = data.aws_eks_cluster_auth.stack.name
+}

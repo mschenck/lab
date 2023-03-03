@@ -40,3 +40,17 @@ module "Orchestration" {
   gcp_svcs_subnet_name = local.gcp_svcs_subnet_name
   gcp_node_pool_name   = local.gcp_node_pool_name
 }
+
+module "Orchestration_kubeconfig" {
+  source = "../modules/kubeconfig"
+
+  ca_certificate = module.Orchestration.ca_data[0]
+  endpoint       = module.Orchestration.endpoint[0]
+  cluster_name   = "Orchestration"
+  user           = module.Orchestration.auth_user[0]
+  client_token   = module.Orchestration.token[0]
+
+  depends_on = [
+    module.Orchestration
+  ]
+}

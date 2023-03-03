@@ -20,7 +20,7 @@ module "aws-orchestration-network" {
 
 ## Cluster
 module "aws-orchestration-cluster" {
-  source = "../aws/k8s"
+  source = "../aws/eks"
 
   cluster_name = var.cluster_name
   vpc_name     = var.network_name
