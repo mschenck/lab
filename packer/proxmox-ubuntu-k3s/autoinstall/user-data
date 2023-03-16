@@ -1,0 +1,36 @@
+#cloud-config
+autoinstall:
+  version: 1
+  locale: en_US.UTF-8
+  keyboard:
+    layout: en
+    variant: us
+  refresh-installer:
+    update: false
+  ssh:
+    install-server: yes
+    allow-pw: yes
+  identity:
+    hostname: ubuntu-k3s
+    password: "$6$exDY1mhS4KUYCE/2$zmn9ToZwTKLhCw.b4/b.ZRTIZM30JZ4QrOQ2aOXJ8yk96xpcCof0kxKwuX1kqLG/ygbJ1f8wxED22bTL4F46P0"
+    username: ubuntu
+  storage:
+    layout:
+      name: direct
+    swap:
+      size: 0
+  network:
+    ethernets:
+      ens18:
+        dhcp4: true
+    version: 2
+  packages:
+  - curl
+  user-data:
+    users:
+    - name: ubuntu
+      sudo: ALL=(ALL) NOPASSWD:ALL
+      shell: /bin/bash
+  late-commands:
+  - curtin in-target --target=/target -- apt update
+  - curtin in-target --target=/target -- apt-get install -y qemu-guest-agent
