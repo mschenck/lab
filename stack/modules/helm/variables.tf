@@ -1,21 +1,4 @@
 
-# k8s auth
-variable "k8s_endpoint" {
-  description = "K8s endpoint of the cluster to install into"
-  type        = string
-
-}
-
-variable "k8s_token" {
-  description = "K8s Client Token"
-  type        = string
-}
-
-variable "k8s_ca_certificate" {
-  description = "K8s CA Certificate of the cluster to install into (expected to be base64decoded)"
-  type        = string
-}
-
 # chart details
 
 variable "helm_repository" {

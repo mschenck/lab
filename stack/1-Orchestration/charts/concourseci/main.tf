@@ -1,4 +1,4 @@
-# # Load k8s credentials
+# Load k8s credentials
 
 provider "helm" {
   kubernetes {
@@ -10,30 +10,20 @@ provider "kubernetes" {
   config_path = "/tmp/lab-stack-orchestration-cluster.kubeconfig"
 }
 
-# Install Orchestration Helm charts
+# Install Concourse-CI Helm chart
 
-module "charts_installation" {
+module "concourse" {
   source = "../../../modules/helm"
 
-  for_each = var.helm_charts
+  helm_chart_name    = var.chart_name
+  helm_repository    = var.repository
+  helm_chart_version = var.chart_version
 
-  helm_chart_name    = each.key
-  helm_repository    = each.value["chart_url"]
-  helm_chart_version = each.value["chart_version"]
-
-  install_name      = each.value["install_name"]
-  install_namespace = each.value["install_namespace"]
-  install_labels    = each.value["install_labels"]
-
-  k8s_endpoint       = "module.Orchestration.endpoint"
-  k8s_ca_certificate = "base64decode(module.Orchestration.aws_ca_data)"
-  k8s_token          = "module.Orchestration.token"
+  install_name      = "concourse"
+  install_namespace = "concourse"
+  install_labels    = var.install_labels
 
   values_files = [
     "${file("values.yaml")}"
   ]
-
-  # depends_on = [
-  #   module.Orchestration
-  # ]
 }

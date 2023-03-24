@@ -1,14 +1,13 @@
-
 variable "repository" {
-  default = "https://concourse-charts.storage.googleapis.com/"
+  default = "https://prometheus-community.github.io/helm-charts"
 }
 
 variable "chart_name" {
-  default = "concourse"
+  default = "prometheus"
 }
 
 variable "chart_version" {
-  default = "17.1.0"
+  default = "20.0.1"
 }
 
 variable "install_labels" {
