@@ -1,11 +1,3 @@
-variable "orchestration_vendor" {
-  description = "The provider to use for storing shared Terraform state."
-  type        = string
-  validation {
-    condition     = contains(["AWS", "GCP"], var.orchestration_vendor)
-    error_message = "Must be one of: [AWS, GCP]"
-  }
-}
 
 variable "orchestration_name" {
   description = "The name used to identify resources as Orchestration component(s)"
@@ -60,4 +52,15 @@ variable "gcp_service_account_name" {
 variable "gke_location" {
   description = "The region/zone of the GKE cluster"
   default     = "us-central1-a"
+}
+
+# Proxmox-specific variables
+variable "proxmox_target_node" {
+  description = "Name of node to run k3s VM on."
+  type        = string
+}
+
+variable "proxmox_vm_template" {
+  description = "The name of the VM template to clone (created with Packer)"
+  type        = string
 }

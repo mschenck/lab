@@ -23,4 +23,17 @@ variable "user" {
 variable "client_token" {
   description = "K8s Client Token"
   type        = string
+  default     = ""
+}
+
+variable "client_certificate_data" {
+  description = "K8s client-certificate-data"
+  type        = string
+  default     = ""
+}
+
+variable "client_key_data" {
+  description = "K8s client-key-data"
+  type        = string
+  default     = ""
 }
