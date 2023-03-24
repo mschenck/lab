@@ -57,10 +57,10 @@ locals {
 # }
 
 ### Proxmox Example
-# module "Orchestration" {
-#   source = "../modules/proxmox/k3s"
+module "Orchestration" {
+  source = "../modules/proxmox/k3s"
 
-#   vm_template  = var.proxmox_vm_template
-#   target_node  = var.proxmox_target_node
-#   cluster_name = local.cluster_name
-# }
+  vm_template  = var.proxmox_vm_template
+  target_node  = var.proxmox_target_node
+  cluster_name = local.cluster_name
+}
