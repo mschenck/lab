@@ -27,9 +27,29 @@ variable "ec2_instance_type" {
   default = "t3.micro"
 }
 
+variable "ec2_instance_min" {
+  type    = number
+  default = 1
+}
+
+variable "ec2_instance_max" {
+  type    = number
+  default = 1
+}
+
+variable "ec2_instance_desired" {
+  type    = number
+  default = 1
+}
+
 variable "ec2_key_name" {
   description = "AWS keypair name"
   type        = string
+}
+
+variable "aws_region" {
+  description = "The region of the EKS cluster"
+  default     = "us-east-1"
 }
 
 # GCP-specific variables
@@ -49,6 +69,7 @@ variable "gcp_service_account_name" {
   description = "RFC1035 compatible name for the k8s service account"
   type        = string
 }
+
 variable "gke_location" {
   description = "The region/zone of the GKE cluster"
   default     = "us-central1-a"

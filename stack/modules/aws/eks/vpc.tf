@@ -1,141 +1,61 @@
-data "aws_vpc" "stack" {
+data "aws_availability_zones" "all" {
   filter {
-    name   = "tag:Name"
-    values = [var.vpc_name]
+    name   = "region-name"
+    values = [var.region]
   }
 }
 
-data "aws_subnets" "stack" {
-  filter {
-    name   = "vpc-id"
-    values = [data.aws_vpc.stack.id]
-  }
+locals {
+  all_azs = data.aws_availability_zones.all.names
+  max_azs = length(local.all_azs)
+  num_azs = min(local.max_azs, var.number_azs)
+  azs     = slice(local.all_azs, 0, local.num_azs)
 }
 
 
-
-output "vpc" {
-  value = data.aws_vpc.stack
-}
-
-output "aws_subnets" {
-  value = data.aws_subnets.stack
-}
-
-
-/*
-resource "aws_vpc" "stack" {
-  cidr_block           = "192.168.0.0/16"
-  instance_tenancy     = "default"
-  enable_dns_hostnames = true
+resource "aws_vpc" "main" {
+  cidr_block                       = var.cidr_block
+  instance_tenancy                 = var.instance_tenancy
+  enable_dns_hostnames             = var.enable_dns_hostnames
+  assign_generated_ipv6_cidr_block = true
 
   tags = {
-    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
+    Name = var.network_name
   }
 }
 
-resource "aws_subnet" "stack-1" {
-  vpc_id                  = aws_vpc.stack.id
-  availability_zone       = "us-east-1a"
-  cidr_block              = "192.168.64.0/18"
-  map_public_ip_on_launch = true
+resource "aws_subnet" "main" {
+  vpc_id            = aws_vpc.main.id
+  count             = local.num_azs
+  availability_zone = data.aws_availability_zones.all.names[count.index]
 
-  tags = {
-    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
-  }
+  cidr_block                      = cidrsubnet(var.cidr_block, local.num_azs, count.index)
+  ipv6_cidr_block                 = cidrsubnet(aws_vpc.main.ipv6_cidr_block, 8, count.index) # Setting 8 bits to ensure a /64
+  assign_ipv6_address_on_creation = true
+  map_public_ip_on_launch         = var.map_public_ips
 
   depends_on = [
-    aws_vpc.stack,
+    aws_vpc.main,
   ]
 }
 
-resource "aws_subnet" "stack-2" {
-  vpc_id                  = aws_vpc.stack.id
-  availability_zone       = "us-east-1c"
-  cidr_block              = "192.168.128.0/18"
-  map_public_ip_on_launch = true
+resource "aws_internet_gateway" "gw" {
+  vpc_id = aws_vpc.main.id
 
   tags = {
-    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
+    Name = var.network_name
   }
-
-  depends_on = [
-    aws_vpc.stack,
-  ]
-}
-
-resource "aws_subnet" "stack-3" {
-  vpc_id                  = aws_vpc.stack.id
-  availability_zone       = "us-east-1e"
-  cidr_block              = "192.168.192.0/18"
-  map_public_ip_on_launch = true
-
-  tags = {
-    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
-  }
-
-  depends_on = [
-    aws_vpc.stack,
-  ]
-}
-
-
-resource "aws_internet_gateway" "inet-gw" {
-  vpc_id = aws_vpc.stack.id
 }
 
 resource "aws_default_route_table" "inet-route" {
-  default_route_table_id = aws_vpc.stack.default_route_table_id
+  default_route_table_id = aws_vpc.main.default_route_table_id
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.inet-gw.id
+    gateway_id = aws_internet_gateway.gw.id
   }
 
   depends_on = [
-    aws_internet_gateway.inet-gw,
+    aws_internet_gateway.gw,
   ]
 }
-
-resource "aws_eip" "nat-gw-1" {
-  vpc = true
-}
-
-resource "aws_nat_gateway" "stack-nat-gw-1" {
-  allocation_id = aws_eip.nat-gw-1.id
-  subnet_id     = aws_subnet.stack-1.id
-
-  depends_on = [
-    aws_eip.nat-gw-1,
-    aws_internet_gateway.inet-gw,
-  ]
-}
-
-resource "aws_eip" "nat-gw-2" {
-  vpc = true
-}
-
-resource "aws_nat_gateway" "stack-nat-gw-2" {
-  allocation_id = aws_eip.nat-gw-2.id
-  subnet_id     = aws_subnet.stack-2.id
-
-  depends_on = [
-    aws_eip.nat-gw-2,
-    aws_internet_gateway.inet-gw,
-  ]
-}
-
-resource "aws_eip" "nat-gw-3" {
-  vpc = true
-}
-
-resource "aws_nat_gateway" "stack-nat-gw-3" {
-  allocation_id = aws_eip.nat-gw-3.id
-  subnet_id     = aws_subnet.stack-3.id
-
-  depends_on = [
-    aws_eip.nat-gw-3,
-    aws_internet_gateway.inet-gw,
-  ]
-}
-*/
