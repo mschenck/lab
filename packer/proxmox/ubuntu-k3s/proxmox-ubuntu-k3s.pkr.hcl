@@ -94,9 +94,9 @@ source "proxmox-iso" "ubuntu-k3s" {
   iso_url          = "${var.iso_url}"
   iso_checksum     = "${var.iso_checksum}"
   iso_storage_pool = "${var.proxmox_iso_storage_pool}"
-  unmount_iso      = true
   boot             = "c"
   boot_wait        = "6s"
+  unmount_iso      = true
 
   boot_command = [
     "<esc><wait><esc><wait><f6><wait><esc><wait>",
@@ -110,6 +110,7 @@ source "proxmox-iso" "ubuntu-k3s" {
     iso_storage_pool = "${var.proxmox_iso_storage_pool}"
     cd_files         = ["./autoinstall/meta-data", "./autoinstall/user-data"]
     cd_label         = "cidata"
+    unmount          = true
   }
 
   # packer -> VM communication
@@ -137,11 +138,6 @@ build {
       "ls /"
     ]
   }
-
-  // provisioner "breakpoint" {
-  //   disable = false
-  //   note    = "this is a breakpoint"
-  // }
 
   provisioner "shell" {
     inline = [
