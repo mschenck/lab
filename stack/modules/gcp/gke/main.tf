@@ -1,6 +1,36 @@
 data "google_client_config" "default" {}
 
-resource "google_container_cluster" "primary" {
+# GKE Network
+resource "google_compute_network" "network" {
+  name                    = var.network_name
+  project                 = var.project_id
+  routing_mode            = var.routing_mode
+  auto_create_subnetworks = false
+}
+
+resource "google_compute_subnetwork" "subnetwork" {
+  name          = var.subnetwork_name
+  project       = var.project_id
+  network       = google_compute_network.network.name
+  region        = var.region
+  ip_cidr_range = var.nodes_cidr_block
+
+  secondary_ip_range = [
+    {
+      range_name    = var.pods_subnet_name,
+      ip_cidr_range = var.pods_subnet_cidr
+    },
+    {
+      range_name    = var.svcs_subnet_name,
+      ip_cidr_range = var.svcs_subnet_cidr
+    }
+  ]
+
+  private_ip_google_access = true
+}
+
+# GKE cluster
+resource "google_container_cluster" "default" {
   name     = var.cluster_name
   project  = var.project_id
   location = var.location
@@ -76,4 +106,23 @@ resource "google_container_cluster" "primary" {
   workload_identity_config {
     workload_pool = "${var.project_id}.svc.id.goog"
   }
+
+  depends_on = [
+    google_compute_network.network,
+    google_compute_subnetwork.subnetwork
+  ]
+}
+
+module "Orchestration_kubeconfig" {
+  source = "../../kubeconfig"
+
+  ca_certificate = google_container_cluster.default.master_auth[0].cluster_ca_certificate
+  endpoint       = "https://${google_container_cluster.default.endpoint}"
+  cluster_name   = var.cluster_name
+  user           = "default"
+  client_token   = data.google_client_config.default.access_token
+
+  depends_on = [
+    google_container_cluster.default
+  ]
 }

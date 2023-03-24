@@ -6,7 +6,8 @@ FROM mcr.microsoft.com/vscode/devcontainers/base:0-alpine${VARIANT}
 
 # Terraform
 RUN apk update \
-    && apk add --no-cache terraform
+    && apk add --no-cache terraform \
+    && apk add --no-cache packer
 
 # tflint
 RUN curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
@@ -22,3 +23,8 @@ ENV PATH="/opt/google-cloud-sdk/bin:$PATH"
 RUN apk add go go-doc
 # RUN /usr/bin/go get -u -v golang.org/x/tools/cmd/gopls 2>&1
 #RUN gcloud components install app-engine-java kubectl
+
+RUN mkdir -p /home/vscode/.config && chown vscode: /home/vscode/.config
+
+# Packer/Proxmox
+RUN apk add xorriso

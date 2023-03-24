@@ -1,16 +1,24 @@
 output "endpoint" {
-  sensitive = true
-  value     = google_container_cluster.primary.endpoint
+  value = "https://${google_container_cluster.default.endpoint}"
 }
 
 output "client_token" {
   sensitive = true
-  value     = base64encode(data.google_client_config.default.access_token)
+  value     = data.google_client_config.default.access_token
+}
+
+output "ca_data" {
+  sensitive = true
+  value     = google_container_cluster.default.master_auth[0].cluster_ca_certificate
+}
+
+output "auth_user" {
+  value = "default"
 }
 
 output "master_auth" {
   sensitive = true
-  value     = google_container_cluster.primary.master_auth
+  value     = google_container_cluster.default.master_auth
 }
 
 output "service_account" {
@@ -33,3 +41,20 @@ output "role-monitoring_viewer" {
 output "role-resourceMetadata-writer" {
   value = google_project_iam_member.cluster_service_account-resourceMetadata-writer
 }
+
+output "gateway_ipv4" {
+  value = google_compute_network.network.gateway_ipv4
+}
+
+output "network_id" {
+  value = google_compute_network.network.id
+}
+
+output "network_name" {
+  value = google_compute_network.network.name
+}
+
+output "subnetwork_name" {
+  value = google_compute_subnetwork.subnetwork.name
+}
+

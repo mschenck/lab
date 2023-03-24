@@ -3,3 +3,4 @@
 **.terraform.lock.hcl
 **state.tf
 **settings.auto.tfvars
+**crash.log

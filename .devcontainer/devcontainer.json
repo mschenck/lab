@@ -29,7 +29,8 @@
 	"extensions": [
 		"golang.Go",
 		"ms-azuretools.vscode-docker",
-		"HashiCorp.terraform"
+		"HashiCorp.terraform",
+		"hashicorp.hcl"
 	],
 	"settings": {
 		// golang

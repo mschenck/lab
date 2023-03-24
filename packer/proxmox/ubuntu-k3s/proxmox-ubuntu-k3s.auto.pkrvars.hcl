@@ -1,0 +1,6 @@
+proxmox_password                = "^*hu7Y"
+proxmox_username                = "terraform-prov@pve"
+k3s_token                       = "1234qwer"
+proxmox_iso_storage_pool        = "local"
+proxmox_cloud_init_storage_pool = "local"
+proxmox_node                    = "lab"
