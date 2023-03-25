@@ -5,22 +5,22 @@ resources:
   type: git
   icon: github
   source:
-    uri: git@github.com:mschenck/lab.git
+    uri: https://github.com/mschenck/lab.git
     branch: main
     username: ((gh_user))
     password: ((gh_pat))
     file: 
 
-- name: version
+- name: semver
   type: semver
   icon: github
   source:
     driver: git
-    uri: git@github.com:mschenck/lab.git
+    uri: https://((gh_user)):((gh_pat))@github.com/mschenck/lab.git
     branch: main
     file: services/introspectd/version
-    username: ((gh_user))
-    password: ((gh_pat))
+    commit_message: "semver updating %file% to %version%"
+    git_user: "git@github.com"
 
 - name: introspectd-image
   type: registry-image
@@ -37,10 +37,11 @@ jobs:
       - get: lab-repo
         trigger: true
 
-      - put: version
+      - get: semver
         params:
-          get_latest: true
           bump: minor
+          outputs:
+            - name: version
 
       - task: build-container-image
         privileged: true
@@ -67,13 +68,14 @@ jobs:
           run:
             path: build
 
-      - put: version
-        params: {file: version/version}
+      - put: semver
+        params:
+          file: semver/version
 
       - put: introspectd-image
         inputs: detect
         params:
           image: image/image.tar
-          additional_tags: lab-repo/services/introspectd/version
+          additional_tags: semver/version
         get_params:
           skip_download: true
