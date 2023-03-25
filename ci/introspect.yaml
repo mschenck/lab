@@ -9,8 +9,11 @@ resources:
     branch: main
     username: ((gh_user))
     password: ((gh_pat))
-    paths: services/introspectd/*
-    ignore_paths: services/introspectd/version
+    paths:
+    - services/introspectd/*.go
+    - services/introspectd/Dockerfile
+    ignore_paths: 
+    - services/introspectd/version
 
 - name: semver
   type: semver
@@ -30,6 +33,7 @@ resources:
     repository: ghcr.io/mschenck/introspectd
     username: ((gh_user))
     password: ((gh_pat))
+    tag: latest
     debug: true
 
 jobs:
