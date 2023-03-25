@@ -5,10 +5,22 @@ resources:
   type: git
   icon: github
   source:
-    uri: https://github.com/mschenck/lab.git
+    uri: git@github.com:mschenck/lab.git
+    branch: main
     username: ((gh_user))
     password: ((gh_pat))
+    file: 
+
+- name: version
+  type: semver
+  icon: github
+  source:
+    driver: git
+    uri: git@github.com:mschenck/lab.git
     branch: main
+    file: services/introspectd/version
+    username: ((gh_user))
+    password: ((gh_pat))
 
 - name: introspectd-image
   type: registry-image
@@ -18,13 +30,17 @@ resources:
     username: ((gh_user))
     password: ((gh_pat))
     debug: true
-    tag: latest
 
 jobs:
   - name: build-introspectd
     plan:
       - get: lab-repo
         trigger: true
+
+      - put: version
+        params:
+          get_latest: true
+          bump: minor
 
       - task: build-container-image
         privileged: true
@@ -51,6 +67,13 @@ jobs:
           run:
             path: build
 
+      - put: version
+        params: {file: version/version}
+
       - put: introspectd-image
+        inputs: detect
         params:
           image: image/image.tar
+          additional_tags: lab-repo/services/introspectd/version
+        get_params:
+          skip_download: true
