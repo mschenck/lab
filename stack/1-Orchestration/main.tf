@@ -63,4 +63,6 @@ module "Orchestration" {
   vm_template  = var.proxmox_vm_template
   target_node  = var.proxmox_target_node
   cluster_name = local.cluster_name
+  cpu_cores    = 2
+  memory_mb    = 4096
 }
