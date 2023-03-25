@@ -9,7 +9,8 @@ resources:
     branch: main
     username: ((gh_user))
     password: ((gh_pat))
-    file: 
+    paths: services/introspectd/*
+    ignore_paths: services/introspectd/version
 
 - name: semver
   type: semver
