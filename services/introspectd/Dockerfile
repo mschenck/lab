@@ -1,5 +1,5 @@
 FROM alpine:latest
-LABEL org.opencontainers.image.source https://github.com/mschenck/lab
+LABEL org.opencontainers.image.source https://github.com/mschenck/lab/services/introspectd
 
 EXPOSE 8000
 
