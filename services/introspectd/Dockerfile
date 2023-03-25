@@ -1,4 +1,5 @@
 FROM alpine:latest
+LABEL org.opencontainers.image.source https://github.com/mschenck/lab
 
 EXPOSE 8000
 
