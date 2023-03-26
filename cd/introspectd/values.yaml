@@ -6,7 +6,7 @@ replicaCount: 2
 
 image:
   repository: ghcr.io/mschenck/introspectd
-  pullPolicy: always
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
