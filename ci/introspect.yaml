@@ -23,7 +23,7 @@ resources:
     branch: main
     file: services/introspectd/version
     commit_message: "semver updating %file% to %version%"
-    git_user: "git@github.com"
+    git_user: "concourse@stack.lab"
 
 - name: introspectd-image
   type: registry-image
