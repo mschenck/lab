@@ -10,8 +10,7 @@ resources:
     username: ((gh_user))
     password: ((gh_pat))
     paths:
-    - services/introspectd/*.go
-    - services/introspectd/Dockerfile
+    - services/introspectd/*
     ignore_paths: 
     - services/introspectd/version
 
