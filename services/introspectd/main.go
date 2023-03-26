@@ -37,7 +37,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		parts := strings.Split(envStr, "=")
 		fmt.Fprintf(w, "%32v\t%v\n", parts[0], strings.Join(parts[1:], "="))
 	}
-	fmt.Fprintln(w, "Update!")
+	fmt.Fprintln(w, "Update2!")
 
 	fmt.Fprintln(w, "")
 }
