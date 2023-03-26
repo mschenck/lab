@@ -1,0 +1,27 @@
+# Tier 2-dev settings
+
+dev_name   = "FILL ME IN"
+
+# Network settings
+nodes_subnet_cidr = "10.0.0.0/16"
+pods_subnet_cidr = "192.168.0.0/18"
+svcs_subnet_cidr = "192.168.64.0/18"
+
+# AWS-specific settings
+ec2_instance_type    = "t3.micro" # AWS Free Tier pricing
+ec2_instance_min     = 1
+ec2_instance_max     = 1
+ec2_instance_desired = 1
+ec2_key_name         = "FILL ME IN"
+aws_region           = "us-east-1"
+
+
+# GCP-specific settings
+gcp_project              = "FILL ME IN"
+gcp_service_account_name = "stack-gke-service-account"
+gcp_region   = "us-central1"
+gke_location = "us-central1-a"
+
+# Proxmox-specific settings
+proxmox_vm_template = "ubuntu-k3s"
+proxmox_target_node = "lab"
