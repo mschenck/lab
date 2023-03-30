@@ -1,5 +1,5 @@
 output "endpoint" {
-  value = "https://${proxmox_vm_qemu.default.ssh_host}:6443"
+  value = var.ipv4_addr != "" ? "https://${var.ipv4_addr}:6443" : "https://${proxmox_vm_qemu.default.ssh_host}:6443"
 }
 
 output "client_certificate_data" {
