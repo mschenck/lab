@@ -65,4 +65,7 @@ module "Orchestration" {
   cluster_name = local.cluster_name
   cpu_cores    = 2
   memory_mb    = 4096
+  ipv4_addr    = var.proxmox_ipv4_addr
+  ipv4_nm_bits = var.proxmox_ipv4_netmask_bits
+  ipv4_gw      = var.proxmox_ipv4_gw
 }

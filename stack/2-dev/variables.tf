@@ -85,3 +85,19 @@ variable "proxmox_vm_template" {
   description = "The name of the VM template to clone (created with Packer)"
   type        = string
 }
+
+variable "proxmox_ipv4_addr" {
+  type    = string
+  default = ""
+}
+
+variable "proxmox_ipv4_netmask_bits" {
+  description = "IPv4 netmask bits i.e. '24' for /24"
+  type        = number
+  default     = 24
+}
+
+variable "proxmox_ipv4_gw" {
+  type    = string
+  default = ""
+}
