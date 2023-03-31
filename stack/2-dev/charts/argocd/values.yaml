@@ -664,7 +664,11 @@ controller:
   statefulsetAnnotations: {}
 
   # -- Annotations to be added to application controller pods
-  podAnnotations: {}
+  podAnnotations: 
+    prometheus.io/scrape: "true"
+    prometheus.io.scheme: "http"
+    prometheus.io/path: "/metrics"
+    prometheus.io/port: "8082"
 
   # -- Labels to be added to application controller pods
   podLabels: {}
@@ -757,10 +761,10 @@ controller:
   ## Application controller metrics configuration
   metrics:
     # -- Deploy metrics service
-    enabled: false
+    enabled: true
     applicationLabels:
       # -- Enables additional labels in argocd_app_labels metric
-      enabled: false
+      enabled: true
       # -- Additional labels
       labels: []
     service:
@@ -856,7 +860,7 @@ dex:
 
   metrics:
     # -- Deploy metrics service
-    enabled: false
+    enabled: true
     service:
       # -- Metrics service annotations
       annotations: {}
@@ -1129,7 +1133,7 @@ redis:
   ## Prometheus redis-exporter sidecar
   exporter:
     # -- Enable Prometheus redis-exporter sidecar
-    enabled: false
+    enabled: true
     # -- Environment variables to pass to the Redis exporter
     env: []
     ## Prometheus redis-exporter image
@@ -1289,7 +1293,7 @@ redis:
 
   metrics:
     # -- Deploy metrics service
-    enabled: false
+    enabled: true
 
     # Redis metrics service configuration
     service:
@@ -1573,7 +1577,11 @@ server:
   deploymentAnnotations: {}
 
   # -- Annotations to be added to server pods
-  podAnnotations: {}
+  podAnnotations:
+    prometheus.io/scrape: "true"
+    prometheus.io.scheme: "http"
+    prometheus.io/path: "/metrics"
+    prometheus.io/port: "8083"
 
   # -- Labels to be added to server pods
   podLabels: {}
@@ -1752,10 +1760,14 @@ server:
   ## Server metrics service configuration
   metrics:
     # -- Deploy metrics service
-    enabled: false
+    enabled: true
     service:
       # -- Metrics service annotations
-      annotations: {}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io.scheme: "http"
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "8083"
       # -- Metrics service labels
       labels: {}
       # -- Metrics service port
