@@ -1,8 +1,0 @@
-# {{ ansible_managed }}
-
-{% for (schema, settings) in carbon_cache.storage_schemas.viewitems() -%}
-[{{ schema }}]
-pattern = {{ settings.pattern }}
-retentions =  {{ settings.retentions }}
-
-{% endfor -%}

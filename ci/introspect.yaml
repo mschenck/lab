@@ -10,9 +10,9 @@ resources:
     username: ((gh_user))
     password: ((gh_pat))
     paths:
-    - services/introspectd/*.go
-    - services/introspectd/Dockerfile
-    - services/introspectd/README.md
+    - src/services/introspectd/*.go
+    - src/services/introspectd/Dockerfile
+    - src/services/introspectd/README.md
 
 - name: semver
   type: semver
@@ -21,7 +21,7 @@ resources:
     driver: git
     uri: https://((gh_user)):((gh_pat))@github.com/mschenck/lab.git
     branch: main
-    file: services/introspectd/version
+    file: src/services/introspectd/version
     commit_message: "semver updating %file% to %version%"
     git_user: "git@github.com"
 
@@ -66,7 +66,7 @@ jobs:
             - name: image
 
           params:
-            CONTEXT: lab-repo/services/introspectd
+            CONTEXT: lab-repo/src/services/introspectd
             OUTPUT_OCI: true
 
           run:
