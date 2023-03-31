@@ -25,3 +25,6 @@ gke_location = "us-central1-a"
 # Proxmox-specific settings
 proxmox_vm_template = "ubuntu-k3s"
 proxmox_target_node = "lab"
+proxmox_ipv4_addr         = "192.168.1.200"
+proxmox_ipv4_netmask_bits = 24
+proxmox_ipv4_gw           = "192.168.1.1"

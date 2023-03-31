@@ -132,10 +132,10 @@ build {
     "source.proxmox-iso.ubuntu-k3s"
   ]
 
+  # Wait for boot-finished
   provisioner "shell" {
     inline = [
-      "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'Waiting for cloud-init...'; sleep 1; done",
-      "ls /"
+      "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'Waiting for cloud-init...'; sleep 1; done"
     ]
   }
 
@@ -143,7 +143,18 @@ build {
     inline = [
       "date > packer-generated",
       "sudo apt update",
-      "curl -sfL https://get.k3s.io | sudo -S sh -s - || true"
+
+      # Install k3s
+      "curl -sfL https://get.k3s.io | sudo -S sh -s - || true",
+
+      # Enable proxmox cloud-init datasource
+      "echo 'datasource_list: [ NoCloud, ConfigDrive ]' | sudo tee -a /etc/cloud/cloud.cfg.d/99_pve.cfg",
+
+      # Enable cloud-init network config
+      "sudo rm /etc/cloud/cloud.cfg.d/subiquity-disable-cloudinit-networking.cfg",
+
+      # Clear cloud-init cache
+      "sudo cloud-init clean"
     ]
   }
 }

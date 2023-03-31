@@ -16,12 +16,19 @@ resource "proxmox_vm_qemu" "default" {
     bridge = "vmbr0"
     model  = "virtio"
   }
+
+  ciuser     = "ubuntu"
+  cipassword = "password"
+
+  ipconfig0 = var.ipv4_addr != "" ? "ip=${var.ipv4_addr}/${var.ipv4_nm_bits},gw=${var.ipv4_gw}" : "dhcp"
+
+  nameserver = var.nameserver
 }
 
 resource "ssh_resource" "get_kubeconfig" {
-  host     = proxmox_vm_qemu.default.ssh_host
+  host     = var.ipv4_addr != "" ? var.ipv4_addr : proxmox_vm_qemu.default.ssh_host
   user     = "ubuntu"
-  password = "ubuntu"
+  password = "password"
 
   commands = [
     "sudo cat /etc/rancher/k3s/k3s.yaml"
@@ -36,7 +43,7 @@ module "Orchestration_kubeconfig" {
   source = "../../kubeconfig"
 
   ca_certificate          = yamldecode(ssh_resource.get_kubeconfig.result).clusters[0].cluster.certificate-authority-data
-  endpoint                = "https://${proxmox_vm_qemu.default.ssh_host}:6443"
+  endpoint                = var.ipv4_addr != "" ? "https://${var.ipv4_addr}:6443" : "https://${proxmox_vm_qemu.default.ssh_host}:6443"
   cluster_name            = var.cluster_name
   user                    = "default"
   client_certificate_data = yamldecode(ssh_resource.get_kubeconfig.result).users[0].user.client-certificate-data
