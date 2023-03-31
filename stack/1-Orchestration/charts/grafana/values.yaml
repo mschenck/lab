@@ -661,9 +661,9 @@ dashboards:
       gnetId: 2
       revision: 2
       datasource: Prometheus
-    argocd:
-      gnetId: 14584
-      revision: 1
+    concourse:
+      gnetId: 7036
+      revision: 2
       datasource: Prometheus
 
 ## Reference to external ConfigMap per provider. Use provider name as key and ConfigMap name as value.
@@ -698,9 +698,6 @@ grafana.ini:
     root_url: "http://grafana.grafana/grafana/"
     serve_from_sub_path: true
 ## grafana Authentication can be enabled with the following values on grafana.ini
- # server:
-      # The full public facing url you use in browser, used for redirects and emails
- #    root_url:
  # https://grafana.com/docs/grafana/latest/auth/github/#enable-github-in-grafana
  # auth.github:
  #    enabled: false
