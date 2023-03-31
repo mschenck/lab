@@ -1,8 +1,0 @@
----
-
-# Builder node
-
-- hosts: all
-  roles:
-    - common
-    - builder

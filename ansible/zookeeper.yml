@@ -1,8 +1,0 @@
----
-
-# ZooKeeper node
-
-- hosts: all
-  roles:
-    - common
-    - zookeeper
